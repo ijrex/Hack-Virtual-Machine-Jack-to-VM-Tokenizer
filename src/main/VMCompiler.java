@@ -2,7 +2,7 @@ import loadfile.*;
 
 import readwrite.*;
 
-class VMAssembler {
+class VMCompiler {
 
   public static void main(String[] args) {
 
