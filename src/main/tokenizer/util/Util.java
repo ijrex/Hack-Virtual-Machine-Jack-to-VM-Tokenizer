@@ -1,13 +1,9 @@
-package readwrite.util;
+package tokenizer.util;
 
 public class Util {
   public static String getOutputFilePath(String pathName) {
     String fileName = pathName.substring(pathName.lastIndexOf("/"));
-    return pathName + fileName + ".test.xml";
-  }
-
-  public static String getFileName(String fileName) {
-    return fileName.substring(0, fileName.lastIndexOf("."));
+    return pathName + fileName + ".temp.xml";
   }
 
   public static String trimExcess(String str) {
