@@ -6,13 +6,17 @@ public class Util {
     return pathName + fileName + ".temp.xml";
   }
 
-  public static String trimExcess(String str) {
+  public static String trimExcess(String str, Boolean multilineComment, Boolean multilineCommentEnd) {
+    if (multilineComment || multilineCommentEnd)
+      str = "";
+
     if (str.length() > 0) {
-      int comment = str.indexOf("//");
-      if (comment >= 0) {
-        str = str.substring(0, comment);
+      int lineComment = str.indexOf("//");
+      if (lineComment >= 0) {
+        str = str.substring(0, lineComment);
       }
     }
+
     str = str.trim();
     return str;
   }

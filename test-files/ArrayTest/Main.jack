@@ -6,6 +6,12 @@
 // (identical to projects/09/Average/Main.jack)
 
 /** Computes the average of a sequence of integers. */
+
+/** Test multi
+    Line comment
+    Test
+ */
+
 class Main {
     function void main() {
         var Array a;

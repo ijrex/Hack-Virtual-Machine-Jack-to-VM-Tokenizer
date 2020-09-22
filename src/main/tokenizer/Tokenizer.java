@@ -31,13 +31,24 @@ public class Tokenizer {
 
       Scanner fileScanner = new Scanner(sourceFile);
 
+      Boolean multilineComment = false;
+
       while (fileScanner.hasNextLine()) {
         String line = fileScanner.nextLine();
 
-        line = Util.trimExcess(line);
+        if (line.startsWith("/*"))
+          multilineComment = true;
+
+        Boolean multilineCommentEnd = false;
+        if (line.endsWith("*/")) {
+          multilineComment = false;
+          multilineCommentEnd = true;
+        }
+
+        line = Util.trimExcess(line, multilineComment, multilineCommentEnd);
 
         if (line.length() > 0) {
-          fileWriter.write("TODO PARSE: " + line + "\n");
+          fileWriter.write(line + "\n");
         }
       }
 

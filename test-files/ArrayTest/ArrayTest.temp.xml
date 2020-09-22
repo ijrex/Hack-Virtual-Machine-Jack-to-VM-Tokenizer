@@ -1,25 +1,24 @@
-TODO PARSE: /** Computes the average of a sequence of integers. */
-TODO PARSE: class Main {
-TODO PARSE: function void main() {
-TODO PARSE: var Array a;
-TODO PARSE: var int length;
-TODO PARSE: var int i, sum;
-TODO PARSE: let length = Keyboard.readInt("HOW MANY NUMBERS? ");
-TODO PARSE: let a = Array.new(length);
-TODO PARSE: let i = 0;
-TODO PARSE: while (i < length) {
-TODO PARSE: let a[i] = Keyboard.readInt("ENTER THE NEXT NUMBER: ");
-TODO PARSE: let i = i + 1;
-TODO PARSE: }
-TODO PARSE: let i = 0;
-TODO PARSE: let sum = 0;
-TODO PARSE: while (i < length) {
-TODO PARSE: let sum = sum + a[i];
-TODO PARSE: let i = i + 1;
-TODO PARSE: }
-TODO PARSE: do Output.printString("THE AVERAGE IS: ");
-TODO PARSE: do Output.printInt(sum / length);
-TODO PARSE: do Output.println();
-TODO PARSE: return;
-TODO PARSE: }
-TODO PARSE: }
+class Main {
+function void main() {
+var Array a;
+var int length;
+var int i, sum;
+let length = Keyboard.readInt("HOW MANY NUMBERS? ");
+let a = Array.new(length);
+let i = 0;
+while (i < length) {
+let a[i] = Keyboard.readInt("ENTER THE NEXT NUMBER: ");
+let i = i + 1;
+}
+let i = 0;
+let sum = 0;
+while (i < length) {
+let sum = sum + a[i];
+let i = i + 1;
+}
+do Output.printString("THE AVERAGE IS: ");
+do Output.printInt(sum / length);
+do Output.println();
+return;
+}
+}
