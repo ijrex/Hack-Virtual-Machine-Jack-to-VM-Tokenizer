@@ -3,8 +3,7 @@ package tokenizer;
 import loadfile.*;
 import tokenizer.util.*;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import token.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -16,14 +15,8 @@ public class Tokenizer {
   File[] sourceFiles;
   String sourceDir;
 
-  Pattern keywordRegex = Pattern.compile(
-      "^(class|constructor|function|method|field|static|var|int|char|boolean|void|true|false|null|this|let|do|if|else|while|return)");
-  Pattern symbolRegex = Pattern.compile("^(\\{|\\}|\\(|\\)|\\[|\\]|\\.|\\,|;|\\+|-|\\*|\\/|&|\\||<|>|=)");
-  Pattern constantRegex = Pattern.compile("^\\d");
-  Pattern stringRegex = Pattern.compile("^\"[^\"]*\"");
-  Pattern identifierRegex = Pattern.compile("^[^\\d][\\w_]*");
-
-  Pattern[] patterns = new Pattern[] { keywordRegex, symbolRegex, constantRegex, stringRegex, identifierRegex };
+  Token[] tokens = new Token[] { new KeywordToken(), new SymbolToken(), new IntConstToken(), new StringConstToken(),
+      new IdentifierToken() };
 
   public Tokenizer(LoadFiles files) {
     sourceFiles = files.getFiles();
@@ -37,12 +30,13 @@ public class Tokenizer {
   }
 
   private String matchToken(String line) throws IOException {
-    for (Pattern pat : this.patterns) {
-      Matcher mat = pat.matcher(line);
-      if (mat.find()) {
-        return mat.group(0);
+    for (Token token : tokens) {
+      String parsedToken = token.parse(line);
+      if (parsedToken != null) {
+        return parsedToken;
       }
     }
+
     System.out.println("Cannot parse: " + line);
     throw new IOException();
   }
