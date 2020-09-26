@@ -29,31 +29,6 @@ public class Tokenizer {
     }
   }
 
-  private String matchToken(String line) throws IOException {
-    for (Token token : tokens) {
-      String parsedToken = token.parse(line);
-      if (parsedToken != null) {
-        return parsedToken;
-      }
-    }
-
-    System.out.println("Cannot parse: " + line);
-    throw new IOException();
-  }
-
-  private String parseTokens(String line) throws IOException {
-    String parsedLine = line;
-    String output = "";
-
-    while (parsedLine.length() > 0) {
-      String token = matchToken(parsedLine);
-      parsedLine = parsedLine.substring(token.length()).trim();
-      output += token + "\n";
-    }
-
-    return output;
-  }
-
   private void createTokenedFile(File sourceFile) {
 
     try {
@@ -93,6 +68,31 @@ public class Tokenizer {
       e.printStackTrace();
       System.exit(1);
     }
+  }
+
+  private String parseTokens(String line) throws IOException {
+    String parsedLine = line;
+    String output = "";
+
+    while (parsedLine.length() > 0) {
+      String token = matchToken(parsedLine);
+      parsedLine = parsedLine.substring(token.length()).trim();
+      output += token + "\n";
+    }
+
+    return output;
+  }
+
+  private String matchToken(String line) throws IOException {
+    for (Token token : tokens) {
+      String parsedToken = token.parse(line);
+      if (parsedToken != null) {
+        return parsedToken;
+      }
+    }
+
+    System.out.println("Cannot parse: " + line);
+    throw new IOException();
   }
 
 }
