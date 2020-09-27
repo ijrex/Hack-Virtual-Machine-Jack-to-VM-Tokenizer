@@ -1,6 +1,6 @@
 import loadfile.*;
 
-import readwrite.*;
+import tokenizer.*;
 
 class VMCompiler {
 
@@ -8,6 +8,8 @@ class VMCompiler {
 
     LoadFiles files = new LoadFiles("../../test-files/ArrayTest", "jack");
 
-    ReadWrite.main(files);
+    Tokenizer tokenizer = new Tokenizer(files);
+    tokenizer.createTokenedFiles();
+
   }
 }
