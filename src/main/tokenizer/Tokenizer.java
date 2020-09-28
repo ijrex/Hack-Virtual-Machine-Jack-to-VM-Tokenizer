@@ -7,9 +7,11 @@ import tokens.*;
 import tokens.token.*;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import java.util.LinkedList;
+import java.util.HashMap;
 
 public class Tokenizer {
 
@@ -18,6 +20,8 @@ public class Tokenizer {
 
   TokenTypeLib tokenTypeLib;
 
+  HashMap<String, LinkedList<Token>> tokenizedFiles = new HashMap<String, LinkedList<Token>>();
+
   public Tokenizer(LoadFiles files) {
     sourceFiles = files.getFiles();
     sourceDir = files.getDirectoryPath();
@@ -25,19 +29,19 @@ public class Tokenizer {
     tokenTypeLib = new TokenTypeLib();
   }
 
-  public void createTokenedFiles() {
+  public HashMap<String, LinkedList<Token>> createTokenedFiles() {
     for (File sourceFile : sourceFiles) {
       createTokenedFile(sourceFile);
     }
+    return tokenizedFiles;
   }
 
   private void createTokenedFile(File sourceFile) {
 
     try {
-      String outputFile = Util.getOutputFilePath(sourceDir);
-      FileWriter fileWriter = new FileWriter(outputFile, false);
-
       Scanner fileScanner = new Scanner(sourceFile);
+
+      LinkedList<Token> tokenizedFile = new LinkedList<Token>();
 
       Boolean multilineComment = false;
 
@@ -56,14 +60,13 @@ public class Tokenizer {
         line = Util.trimExcess(line, multilineComment, multilineCommentEnd);
 
         if (line.length() > 0) {
-          String output = parseLineToTokens(line);
-          fileWriter.write(output);
+          parseLineToTokens(line, tokenizedFile);
         }
       }
 
+      tokenizedFiles.put(sourceFile.getName(), tokenizedFile);
+
       fileScanner.close();
-      fileWriter.close();
-      System.out.println(outputFile);
 
     } catch (IOException e) {
       System.out.println("An error occured parsing " + sourceFile.getName());
@@ -72,22 +75,19 @@ public class Tokenizer {
     }
   }
 
-  private String parseLineToTokens(String line) throws IOException {
+  private void parseLineToTokens(String line, LinkedList<Token> tokenizedFile) throws IOException {
     String parsedLine = line;
-    String output = "";
 
     while (parsedLine.length() > 0) {
-      Token token = matchToken(parsedLine);
+      Token token = matchNextToken(parsedLine);
       String value = token.getValue();
 
+      tokenizedFile.add(token);
       parsedLine = parsedLine.substring(value.length()).trim();
-      output += "<" + token.getFormattedType() + "> " + value + "\n";
     }
-
-    return output;
   }
 
-  private Token matchToken(String line) throws IOException {
+  private Token matchNextToken(String line) throws IOException {
     Token token = tokenTypeLib.getTokenTypeFromString(line);
 
     if (token != null)
