@@ -15,7 +15,7 @@ public abstract class Token {
   }
 
   public TokenType getType() {
-    return null;
+    return type;
   }
 
   public String getFormattedType() {
