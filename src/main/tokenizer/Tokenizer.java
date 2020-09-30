@@ -1,10 +1,9 @@
 package tokenizer;
 
 import loadfile.*;
+import token.*;
+import tokenlib.*;
 import tokenizer.util.*;
-
-import tokens.*;
-import tokens.token.*;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,6 +1,6 @@
-package tokens.token;
+package token;
 
-import tokens.*;
+import tokenlib.*;
 
 public class SymbolToken extends Token {
 

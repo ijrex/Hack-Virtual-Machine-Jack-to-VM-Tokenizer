@@ -1,4 +1,4 @@
-package tokens;
+package tokenlib;
 
 public enum Keywords {
   CLASS("class"), CONSTRUCTOR("constructor"), FUNCTION("function"), METHOD("method"), FIELD("field"), STATIC("static"),

@@ -1,6 +1,5 @@
 import loadfile.*;
-
-import tokens.token.*;
+import token.*;
 import tokenizer.*;
 
 import compilationengine.*;
