@@ -1,6 +1,6 @@
-package tokens.token;
+package token;
 
-import tokens.*;
+import tokenlib.*;
 
 public class IntConstToken extends Token {
 

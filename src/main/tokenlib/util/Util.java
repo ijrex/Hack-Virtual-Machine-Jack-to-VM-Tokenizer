@@ -1,6 +1,6 @@
-package tokens.util;
+package tokenlib.util;
 
-import tokens.*;
+import tokenlib.*;
 
 public class Util {
   public static String getKeywordReg() {

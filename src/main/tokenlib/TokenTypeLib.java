@@ -1,9 +1,10 @@
-package tokens;
-
-import tokens.token.*;
-import tokens.util.*;
+package tokenlib;
 
 import java.util.regex.Pattern;
+
+import token.*;
+import tokenlib.util.*;
+
 import java.util.regex.Matcher;
 
 import java.util.Map;
