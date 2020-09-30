@@ -1,4 +1,4 @@
-package tokens;
+package tokenlib;
 
 public enum Symbols {
   BRACE_L("{"), BRACE_R("}"), PARENTHESIS_L("("), PARENTHESIS_R(")"), BRACKET_L("["), BRACKET_R("]"), COMMA(","),

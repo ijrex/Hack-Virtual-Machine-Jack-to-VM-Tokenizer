@@ -1,6 +1,6 @@
-package tokens.token;
+package token;
 
-import tokens.*;
+import tokenlib.*;
 
 public abstract class Token {
   protected String value;
