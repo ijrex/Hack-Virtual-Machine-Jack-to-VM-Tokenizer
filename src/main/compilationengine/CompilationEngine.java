@@ -1,7 +1,7 @@
 package compilationengine;
 
-import tokens.*;
-import tokens.token.*;
+import tokenlib.*;
+import token.*;
 
 import java.util.HashMap;
 import java.util.LinkedList;
