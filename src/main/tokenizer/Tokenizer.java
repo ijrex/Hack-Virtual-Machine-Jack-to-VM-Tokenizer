@@ -9,8 +9,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+import compilationEngine.CompilationEngine;
+
 import java.util.LinkedList;
 import java.util.HashMap;
+
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Tokenizer {
 
@@ -19,6 +24,8 @@ public class Tokenizer {
 
   TokenTypeLib tokenTypeLib;
 
+  CompilationEngine compilationEngine;
+
   HashMap<String, LinkedList<Token>> tokenizedFiles = new HashMap<String, LinkedList<Token>>();
 
   public Tokenizer(LoadFiles files) {
@@ -26,13 +33,16 @@ public class Tokenizer {
     sourceDir = files.getDirectoryPath();
 
     tokenTypeLib = new TokenTypeLib();
+
+    compilationEngine = new CompilationEngine();
+
+    createTokenedFiles();
   }
 
-  public HashMap<String, LinkedList<Token>> createTokenedFiles() {
+  private void createTokenedFiles() {
     for (File sourceFile : sourceFiles) {
       createTokenedFile(sourceFile);
     }
-    return tokenizedFiles;
   }
 
   private void createTokenedFile(File sourceFile) {
@@ -40,7 +50,7 @@ public class Tokenizer {
     try {
       Scanner fileScanner = new Scanner(sourceFile);
 
-      LinkedList<Token> tokenizedFile = new LinkedList<Token>();
+      FileWriter fileWriter = new FileWriter("../../test-files/ArrayTest/" + sourceFile.getName() + ".test.xml", false);
 
       Boolean multilineComment = false;
 
@@ -59,12 +69,11 @@ public class Tokenizer {
         line = Util.trimExcess(line, multilineComment, multilineCommentEnd);
 
         if (line.length() > 0) {
-          parseLineToTokens(line, tokenizedFile);
+          parseLineToTokens(line, fileWriter);
         }
       }
 
-      tokenizedFiles.put(sourceFile.getName(), tokenizedFile);
-
+      fileWriter.close();
       fileScanner.close();
 
     } catch (IOException e) {
@@ -74,14 +83,15 @@ public class Tokenizer {
     }
   }
 
-  private void parseLineToTokens(String line, LinkedList<Token> tokenizedFile) throws IOException {
+  private void parseLineToTokens(String line, FileWriter fileWriter) throws IOException {
     String parsedLine = line;
 
     while (parsedLine.length() > 0) {
       Token token = matchNextToken(parsedLine);
       String value = token.getValue();
 
-      tokenizedFile.add(token);
+      fileWriter.write(compilationEngine.parseToken(token));
+
       parsedLine = parsedLine.substring(value.length()).trim();
     }
   }
