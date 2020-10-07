@@ -26,12 +26,12 @@ public class TokenTypeLib {
     // Populate `tokens` map with predefined keyword and
     // symbol tokens. i.e. 'class', '{'
 
-    for (Keywords keyword : Keywords.values()) {
+    for (Keyword keyword : Keyword.values()) {
       String value = keyword.getValue();
       tokens.put(value, new KeywordToken(value));
     }
 
-    for (Symbols symbol : Symbols.values()) {
+    for (Symbol symbol : Symbol.values()) {
       String value = symbol.getValue();
       tokens.put(value, new SymbolToken(value));
     }

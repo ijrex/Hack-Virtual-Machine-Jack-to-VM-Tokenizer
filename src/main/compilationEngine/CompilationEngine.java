@@ -1,5 +1,7 @@
 package compilationEngine;
 
+import java.io.IOException;
+
 import token.*;
 
 public class CompilationEngine {
@@ -9,9 +11,8 @@ public class CompilationEngine {
     compileClass = new CompileClass();
   }
 
-  public String parseToken(Token token) {
-    String output = compileClass.handleToken(token);
-    return output;
+  public String parseToken(Token token) throws IOException {
+    return compileClass.handleToken(token);
   }
 
 }
