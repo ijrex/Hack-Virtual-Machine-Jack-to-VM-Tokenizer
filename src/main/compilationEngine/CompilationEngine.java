@@ -12,6 +12,9 @@ public class CompilationEngine {
   }
 
   public String parseToken(Token token) throws IOException {
-    return compileClass.handleToken(token);
+    if (!compileClass.finished) {
+      return compileClass.handleToken(token);
+    }
+    return "...\n";
   }
 }

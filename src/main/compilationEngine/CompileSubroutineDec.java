@@ -8,9 +8,9 @@ import java.io.IOException;
 
 import compilationEngine.util.*;
 
-public class CompileSubroutine extends Compile {
+public class CompileSubroutineDec extends Compile {
 
-  public CompileSubroutine(int _tab) {
+  public CompileSubroutineDec(int _tab) {
     super(_tab);
   }
 

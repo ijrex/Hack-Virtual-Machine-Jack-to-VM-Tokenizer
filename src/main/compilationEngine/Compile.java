@@ -7,12 +7,12 @@ import java.io.IOException;
 import compilationEngine.util.*;
 
 public abstract class Compile {
-  int pos;
   int tab;
-  boolean finished;
+  int pos = -1;
+  boolean finished = false;
+  String wrapperLabel = "undefined";
 
   public Compile(int _tab) {
-    pos = -1;
     tab = _tab;
     finished = false;
   }
@@ -38,14 +38,18 @@ public abstract class Compile {
     return "\t".repeat(tab + modifier);
   }
 
-  protected String preface(String label) {
+  protected String preface(Token token) throws IOException {
     pos++;
     tab++;
-    return "<" + label + ">";
+    return "<" + wrapperLabel + ">" + handleToken(token);
   }
 
-  protected String postface(String label) {
+  protected String postface() {
     finished = true;
-    return "</" + label + ">";
+    return "</" + wrapperLabel + ">\n";
+  }
+
+  protected String handleToken(Token token) throws IOException {
+    throw new IOException();
   }
 }

@@ -10,18 +10,29 @@ import compilationEngine.util.*;
 
 public class CompileClass extends Compile {
 
-  CompileSubroutine compileSubroutine;
+  Compile compileDec;
 
   public CompileClass(int _tabs) {
     super(_tabs);
+    wrapperLabel = "class";
+  }
+
+  private void setDecType(Token token) throws IOException {
+    if (Match.isSubroutineDec(token)) {
+      compileDec = new CompileSubroutineDec(tab);
+      return;
+    }
+    if (Match.isClassVarDec(token)) {
+      compileDec = new CompileClassVarDec(tab);
+      return;
+    }
+    throw new IOException("ERROR: parsing \"" + token.getValue() + "\"");
   }
 
   public String handleToken(Token token) throws IOException {
     switch (pos) {
       case -1:
-        pos++;
-        tab++;
-        return "<class>\n" + handleToken(token);
+        return preface(token);
       case 0:
         return parseToken(token, Match.keyword(token, Keyword.CLASS));
       case 1:
@@ -29,17 +40,12 @@ public class CompileClass extends Compile {
       case 2:
         return parseToken(token, Match.symbol(token, Symbol.BRACE_L));
       case 3:
-        if (compileSubroutine == null) {
-          compileSubroutine = new CompileSubroutine(tab);
-        }
-        if (Match.isSubroutineDec(token) || compileSubroutine != null) {
-          if (!compileSubroutine.isComplete()) {
-            return compileSubroutine.handleToken(token);
-          }
-        }
+        if (compileDec == null)
+          setDecType(token);
+        if (!compileDec.isComplete())
+          return compileDec.handleToken(token);
       default:
-        pos++;
-        return "...\n";
+        return postface();
     }
   }
 }
