@@ -8,11 +8,10 @@ public class CompilationEngine {
   CompileClass compileClass;
 
   public CompilationEngine() {
-    compileClass = new CompileClass();
+    compileClass = new CompileClass(0);
   }
 
   public String parseToken(Token token) throws IOException {
     return compileClass.handleToken(token);
   }
-
 }

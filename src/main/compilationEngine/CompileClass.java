@@ -8,33 +8,15 @@ import java.io.IOException;
 
 import compilationEngine.util.*;
 
-public class CompileClass {
-  int pos;
-  int tab;
+public class CompileClass extends Compile {
 
   CompileSubroutine compileSubroutine;
 
-  public CompileClass() {
-    pos = -1;
-    tab = 0;
-  }
-
-  private String parseToken(Token token, Boolean passing) throws IOException {
-    if (passing) {
-      pos++;
-      String tabs = "\t".repeat(tab);
-
-      return tabs + Parse.token(token);
-    }
-
-    throw new IOException("ERROR: parsing \"" + token.getValue() + "\"");
-
+  public CompileClass(int _tabs) {
+    super(_tabs);
   }
 
   public String handleToken(Token token) throws IOException {
-
-    String name;
-
     switch (pos) {
       case -1:
         pos++;
@@ -43,7 +25,6 @@ public class CompileClass {
       case 0:
         return parseToken(token, Match.keyword(token, Keyword.CLASS));
       case 1:
-        name = token.getValue();
         return parseToken(token, Match.identifier(token));
       case 2:
         return parseToken(token, Match.symbol(token, Symbol.BRACE_L));
