@@ -41,12 +41,12 @@ public abstract class Compile {
   protected String preface(Token token) throws IOException {
     pos++;
     tab++;
-    return "<" + wrapperLabel + ">" + handleToken(token);
+    return tabs(-1) + "<" + wrapperLabel + ">\n" + handleToken(token);
   }
 
   protected String postface() {
     finished = true;
-    return "</" + wrapperLabel + ">\n";
+    return tabs(-1) + "</" + wrapperLabel + ">\n";
   }
 
   protected String handleToken(Token token) throws IOException {

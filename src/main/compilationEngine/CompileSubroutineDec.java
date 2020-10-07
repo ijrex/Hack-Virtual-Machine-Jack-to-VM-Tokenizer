@@ -12,15 +12,14 @@ public class CompileSubroutineDec extends Compile {
 
   public CompileSubroutineDec(int _tab) {
     super(_tab);
+    wrapperLabel = "subroutineDec";
   }
 
   public String handleToken(Token token) throws IOException {
 
     switch (pos) {
       case -1:
-        pos++;
-        tab++;
-        return tabs(-1) + "<subroutineDec>\n" + handleToken(token);
+        return preface(token);
       case 0:
         return parseToken(token,
             Match.keyword(token, new Keyword[] { Keyword.CONSTRUCTOR, Keyword.FUNCTION, Keyword.METHOD }));
@@ -32,8 +31,7 @@ public class CompileSubroutineDec extends Compile {
       case 3:
         return parseToken(token, Match.symbol(token, Symbol.PARENTHESIS_L));
       default:
-        finished = true;
-        return tabs(-1) + "<subroutineDec>\n";
+        return postface();
     }
   }
 }

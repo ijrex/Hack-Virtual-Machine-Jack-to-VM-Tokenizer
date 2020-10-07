@@ -1,4 +1,5 @@
-<class>	<keyword> class </keyword>
+<class>
+	<keyword> class </keyword>
 	<identifier> Main </identifier>
 	<symbol> { </symbol>
 	<subroutineDec>
@@ -6,7 +7,7 @@
 		<keyword> void </keyword>
 		<identifier> main </identifier>
 		<symbol> ( </symbol>
-	<subroutineDec>
+	</subroutineDec>
 </class>
 ...
 ...
