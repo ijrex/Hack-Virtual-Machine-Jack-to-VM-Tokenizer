@@ -11,6 +11,7 @@ import compilationEngine.util.*;
 public class CompileSubroutineDec extends Compile {
 
   Compile parameterList;
+  Compile subroutineBody;
 
   public CompileSubroutineDec(int _tab) {
     super(_tab);
@@ -34,10 +35,13 @@ public class CompileSubroutineDec extends Compile {
       case 4:
         if (parameterList == null)
           parameterList = new CompileParameterList(tab);
-
         return parameterList.handleToken(token)
             + (Match.symbol(token, Symbol.PARENTHESIS_R) ? parseToken(token, true) : "");
-
+      case 5:
+        if (subroutineBody == null)
+          subroutineBody = new CompileSubroutineBody(tab);
+        if (!subroutineBody.isComplete())
+          return subroutineBody.handleToken(token);
       default:
         return postface();
     }

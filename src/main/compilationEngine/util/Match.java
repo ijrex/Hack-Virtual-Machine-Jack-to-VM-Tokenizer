@@ -29,13 +29,12 @@ public class Match {
 
   public static Boolean type(Token token) {
     Keyword[] expected = new Keyword[] { Keyword.BOOLEAN, Keyword.CHAR, Keyword.INT };
-
-    for (Keyword keyword : expected) {
-      if (keyword(token, keyword)) {
-        return true;
-      }
+    if (keyword(token, expected)) {
+      return true;
     }
-
+    if (identifier(token)) {
+      return true;
+    }
     return false;
   }
 
@@ -48,12 +47,16 @@ public class Match {
   public static Boolean isClassVarDec(Token token) {
     Keyword[] expected = new Keyword[] { Keyword.STATIC, Keyword.FIELD };
 
-    for (Keyword keyword : expected) {
-      if (keyword(token, keyword)) {
-        return true;
-      }
-    }
+    return keyword(token, expected);
+  }
 
-    return false;
+  public static Boolean isVarDec(Token token) {
+    return keyword(token, Keyword.VAR);
+  }
+
+  public static Boolean isStatementDec(Token token) {
+    Keyword[] expected = new Keyword[] { Keyword.LET, Keyword.IF, Keyword.WHILE, Keyword.DO, Keyword.RETURN };
+
+    return keyword(token, expected);
   }
 }
