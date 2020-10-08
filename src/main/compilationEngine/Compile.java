@@ -26,6 +26,15 @@ public abstract class Compile {
     throw new IOException("ERROR: parsing \"" + token.getValue() + "\"");
   }
 
+  protected String parseToken(Token token, Boolean pass, int modifier) throws IOException {
+    if (pass) {
+      pos = pos + modifier;
+      return tabs() + Parse.token(token);
+    }
+
+    throw new IOException("ERROR: parsing \"" + token.getValue() + "\"");
+  }
+
   protected Boolean isComplete() {
     return finished;
   }
@@ -41,7 +50,7 @@ public abstract class Compile {
   protected String preface(Token token) throws IOException {
     pos++;
     tab++;
-    return tabs(-1) + "<" + wrapperLabel + ">\n" + handleToken(token);
+    return tabs(-1) + "<" + wrapperLabel + ">\n" + ((token != null) ? handleToken(token) : "");
   }
 
   protected String postface() {

@@ -27,6 +27,18 @@ public class Match {
     return token.getType() == TokenType.IDENTIFIER;
   }
 
+  public static Boolean type(Token token) {
+    Keyword[] expected = new Keyword[] { Keyword.BOOLEAN, Keyword.CHAR, Keyword.INT };
+
+    for (Keyword keyword : expected) {
+      if (keyword(token, keyword)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   public static Boolean isSubroutineDec(Token token) {
     Keyword[] expected = new Keyword[] { Keyword.CONSTRUCTOR, Keyword.FUNCTION, Keyword.METHOD };
 
