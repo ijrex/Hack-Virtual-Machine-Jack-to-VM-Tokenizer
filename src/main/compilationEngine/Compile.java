@@ -62,9 +62,9 @@ public abstract class Compile {
     return tabs(-1) + "</" + wrapperLabel + ">\n";
   }
 
-  protected String postface(boolean repeat) {
+  protected String postfaceRepeat(Token token) throws IOException {
     tab = (tab > 0) ? tab - 1 : 0;
-    return tabs() + "</" + wrapperLabel + ">\n";
+    return tabs() + "</" + wrapperLabel + ">\n" + preface(token);
   }
 
   protected String handleToken(Token token) throws IOException {

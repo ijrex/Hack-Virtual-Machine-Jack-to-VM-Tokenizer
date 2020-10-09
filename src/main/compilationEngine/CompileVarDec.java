@@ -33,7 +33,7 @@ public class CompileVarDec extends Compile {
         return parseToken(token, Match.symbol(token, Symbol.SEMI_COLON));
       default:
         if (Match.keyword(token, Keyword.VAR))
-          return postface(true) + preface(token);
+          return postfaceRepeat(token);
         return postface();
     }
   }
