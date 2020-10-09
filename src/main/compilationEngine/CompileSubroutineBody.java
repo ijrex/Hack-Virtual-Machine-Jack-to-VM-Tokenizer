@@ -38,8 +38,11 @@ public class CompileSubroutineBody extends Compile {
       case 1:
         if (dec == null)
           setDecType(token);
-        if (!dec.isComplete())
+        if (!dec.isComplete()) {
           return dec.handleToken(token);
+
+        }
+
       default:
         return postface();
     }

@@ -32,7 +32,7 @@ public class CompileParameterList extends Compile {
       case 2:
         if (endOfArgs(token))
           return postface();
-        return parseToken(token, Match.symbol(token, Symbol.COMMA), -2);
+        return parseToken(token, Match.symbol(token, Symbol.COMMA), 0);
       default:
         return postface();
     }

@@ -28,8 +28,12 @@ public class CompileVarDec extends Compile {
       case 2:
         return parseToken(token, Match.identifier(token));
       case 3:
+        if (Match.symbol(token, Symbol.COMMA))
+          return parseToken(token, true, 2);
         return parseToken(token, Match.symbol(token, Symbol.SEMI_COLON));
       default:
+        if (Match.keyword(token, Keyword.VAR))
+          return postface(true) + preface(token);
         return postface();
     }
   }

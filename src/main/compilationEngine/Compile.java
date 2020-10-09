@@ -28,7 +28,7 @@ public abstract class Compile {
 
   protected String parseToken(Token token, Boolean pass, int modifier) throws IOException {
     if (pass) {
-      pos = pos + modifier;
+      pos = modifier;
       return tabs() + Parse.token(token);
     }
 
@@ -37,6 +37,10 @@ public abstract class Compile {
 
   protected Boolean isComplete() {
     return finished;
+  }
+
+  public void reset() {
+    finished = false;
   }
 
   protected String tabs() {
@@ -48,7 +52,7 @@ public abstract class Compile {
   }
 
   protected String preface(Token token) throws IOException {
-    pos++;
+    pos = 0;
     tab++;
     return tabs(-1) + "<" + wrapperLabel + ">\n" + ((token != null) ? handleToken(token) : "");
   }
@@ -56,6 +60,11 @@ public abstract class Compile {
   protected String postface() {
     finished = true;
     return tabs(-1) + "</" + wrapperLabel + ">\n";
+  }
+
+  protected String postface(boolean repeat) {
+    tab = (tab > 0) ? tab - 1 : 0;
+    return tabs() + "</" + wrapperLabel + ">\n";
   }
 
   protected String handleToken(Token token) throws IOException {
