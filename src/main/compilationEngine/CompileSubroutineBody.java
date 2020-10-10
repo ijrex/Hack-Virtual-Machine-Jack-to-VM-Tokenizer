@@ -11,42 +11,48 @@ import compilationEngine.util.*;
 public class CompileSubroutineBody extends Compile {
 
   Compile varDec;
-  Compile statementDec;
+  Compile statements;
 
   public CompileSubroutineBody(int _tabs) {
     super(_tabs);
     wrapperLabel = "subroutineBody";
   }
 
+  private String handleDec(Compile dec, Token token) throws IOException {
+    if (dec != null && !dec.isComplete()) {
+      String str = dec.handleToken(token);
+      if (dec.isComplete()) {
+        return str + handleToken(token);
+      }
+      return str;
+    }
+    return null;
+  }
+
   public String handleToken(Token token) throws IOException {
     switch (pos) {
       case -1:
         return preface(token);
+
       case 0:
         return parseToken(token, Match.symbol(token, Symbol.BRACE_L));
+
       case 1:
+        // Var Declaration: Zero or more
         if (varDec == null && Match.keyword(token, Keyword.VAR))
           varDec = new CompileVarDec(tab);
-        if (varDec != null && !varDec.isComplete()) {
-          String str = varDec.handleToken(token);
-          if (varDec.isComplete()) {
-            return str + handleToken(token);
-          }
-          return str;
-        }
-      case 2:
-        if (statementDec == null && Match.isStatementDec(token)) {
-          statementDec = new CompileStatement(tab);
-        }
-        if (statementDec != null && !statementDec.isComplete()) {
-          String str = statementDec.handleToken(token);
-          if (statementDec.isComplete()) {
-            return str + handleToken(token);
-          }
-          return str;
-        }
+        String handledVar = handleDec(varDec, token);
+        if (handledVar != null)
+          return handledVar;
 
-        return token.getValue() + "\n";
+      case 2:
+        // Statement: Zero or more
+        if (statements == null && Match.isStatementDec(token))
+          statements = new CompileStatement(tab);
+        String handledStatement = handleDec(statements, token);
+        if (handledStatement != null)
+          return handledStatement;
+
       default:
         return postface();
     }
