@@ -28,7 +28,7 @@ public class TokenTypeLib {
 
     for (Keyword keyword : Keyword.values()) {
       String value = keyword.getValue();
-      tokens.put(value, new KeywordToken(value));
+      tokens.put(value, new KeywordToken(value, keyword));
     }
 
     for (Symbol symbol : Symbol.values()) {

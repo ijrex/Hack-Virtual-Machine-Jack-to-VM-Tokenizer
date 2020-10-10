@@ -18,7 +18,7 @@ public class CompileSubroutineBody extends Compile {
     wrapperLabel = "subroutineBody";
   }
 
-  private String handleDec(Compile dec, Token token) throws IOException {
+  private String handleSubroutine(Compile dec, Token token) throws IOException {
     if (dec != null && !dec.isComplete()) {
       String str = dec.handleToken(token);
       if (dec.isComplete()) {
@@ -41,7 +41,7 @@ public class CompileSubroutineBody extends Compile {
         // Var Declaration: Zero or more
         if (varDec == null && Match.keyword(token, Keyword.VAR))
           varDec = new CompileVarDec(tab);
-        String handledVar = handleDec(varDec, token);
+        String handledVar = handleSubroutine(varDec, token);
         if (handledVar != null)
           return handledVar;
 
@@ -49,7 +49,7 @@ public class CompileSubroutineBody extends Compile {
         // Statement: Zero or more
         if (statements == null && Match.isStatementDec(token))
           statements = new CompileStatement(tab);
-        String handledStatement = handleDec(statements, token);
+        String handledStatement = handleSubroutine(statements, token);
         if (handledStatement != null)
           return handledStatement;
 

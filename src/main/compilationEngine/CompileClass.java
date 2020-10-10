@@ -40,6 +40,7 @@ public class CompileClass extends Compile {
       case 2:
         return parseToken(token, Match.symbol(token, Symbol.BRACE_L));
       case 3:
+        // TODO: Handle multiple classVar and subroutine
         if (compileDec == null)
           setDecType(token);
         if (!compileDec.isComplete())
