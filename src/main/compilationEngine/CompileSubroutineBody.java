@@ -10,23 +10,12 @@ import compilationEngine.util.*;
 
 public class CompileSubroutineBody extends Compile {
 
-  Compile dec;
+  Compile varDec;
+  Compile statementDec;
 
   public CompileSubroutineBody(int _tabs) {
     super(_tabs);
     wrapperLabel = "subroutineBody";
-  }
-
-  private void setDecType(Token token) throws IOException {
-    if (Match.isVarDec(token)) {
-      dec = new CompileVarDec(tab);
-      return;
-    }
-    if (Match.isStatementDec(token)) {
-      dec = new CompileStatement(tab);
-      return;
-    }
-    throw new IOException("ERROR: parsing \"" + token.getValue() + "\"");
   }
 
   public String handleToken(Token token) throws IOException {
@@ -36,13 +25,28 @@ public class CompileSubroutineBody extends Compile {
       case 0:
         return parseToken(token, Match.symbol(token, Symbol.BRACE_L));
       case 1:
-        if (dec == null)
-          setDecType(token);
-        if (!dec.isComplete()) {
-          return dec.handleToken(token);
-
+        if (varDec == null && Match.keyword(token, Keyword.VAR))
+          varDec = new CompileVarDec(tab);
+        if (varDec != null && !varDec.isComplete()) {
+          String str = varDec.handleToken(token);
+          if (varDec.isComplete()) {
+            return str + handleToken(token);
+          }
+          return str;
+        }
+      case 2:
+        if (statementDec == null && Match.isStatementDec(token)) {
+          statementDec = new CompileStatement(tab);
+        }
+        if (statementDec != null && !statementDec.isComplete()) {
+          String str = statementDec.handleToken(token);
+          if (statementDec.isComplete()) {
+            return str + handleToken(token);
+          }
+          return str;
         }
 
+        return token.getValue() + "\n";
       default:
         return postface();
     }
