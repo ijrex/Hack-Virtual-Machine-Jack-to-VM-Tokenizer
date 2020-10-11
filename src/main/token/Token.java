@@ -18,6 +18,10 @@ public abstract class Token {
     return type;
   }
 
+  public Keyword getKeyword() {
+    return null;
+  }
+
   public String getFormattedType() {
     return this.type.toString().toLowerCase();
   }
