@@ -38,14 +38,15 @@
 					<identifier> length </identifier>
 					<symbol> = </symbol>
 					<expression>
+(looking ahead...)Keyboard
+Keyboard
+.
 					</expression>
 				</letStatement>
 			</statements>
 		</subroutineBody>
 	</subroutineDec>
 </class>
-...
-...
 ...
 ...
 ...
