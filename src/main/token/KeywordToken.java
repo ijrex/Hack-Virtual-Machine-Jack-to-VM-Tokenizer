@@ -4,8 +4,15 @@ import tokenlib.*;
 
 public class KeywordToken extends Token {
 
-  public KeywordToken(String value) {
+  Keyword keyword;
+
+  public KeywordToken(String value, Keyword _keyword) {
     super(value);
     this.type = TokenType.KEYWORD;
+    this.keyword = _keyword;
+  }
+
+  public Keyword getKeyword() {
+    return keyword;
   }
 }

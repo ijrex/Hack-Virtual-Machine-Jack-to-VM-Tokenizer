@@ -15,6 +15,10 @@ public abstract class Token {
   }
 
   public TokenType getType() {
+    return type;
+  }
+
+  public Keyword getKeyword() {
     return null;
   }
 

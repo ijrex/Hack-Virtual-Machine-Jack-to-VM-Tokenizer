@@ -5,7 +5,7 @@ import tokenlib.*;
 public class Util {
   public static String getKeywordReg() {
     String reg = "^(";
-    for (Keywords keyword : Keywords.values()) {
+    for (Keyword keyword : Keyword.values()) {
       reg += keyword.getValue() + "|";
     }
     return reg.substring(0, reg.length() - 1) + ")";
@@ -13,7 +13,7 @@ public class Util {
 
   public static String getSymbolReg() {
     String reg = "^(";
-    for (Symbols symbol : Symbols.values()) {
+    for (Symbol symbol : Symbol.values()) {
       reg += "\\" + symbol.getValue() + "|";
     }
     return reg.substring(0, reg.length() - 1) + ")";
