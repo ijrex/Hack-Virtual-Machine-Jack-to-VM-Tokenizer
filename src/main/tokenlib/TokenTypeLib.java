@@ -33,7 +33,7 @@ public class TokenTypeLib {
 
     for (Symbol symbol : Symbol.values()) {
       String value = symbol.getValue();
-      tokens.put(value, new SymbolToken(value));
+      tokens.put(value, new SymbolToken(value, symbol));
     }
   }
 

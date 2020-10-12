@@ -3,7 +3,7 @@ package tokenlib;
 public enum Symbol {
   BRACE_L("{"), BRACE_R("}"), PARENTHESIS_L("("), PARENTHESIS_R(")"), BRACKET_L("["), BRACKET_R("]"), COMMA(","),
   PERIOD("."), SEMI_COLON(";"), PLUS("+"), MINUS("-"), ASTERISK("*"), SLASH_FWD("/"), AMPERSAND("&"), PIPE("|"),
-  LESS_THAN("<"), MORE_THAN(">"), EQUALS("="), UNDERSCORE("_"),;
+  LESS_THAN("<"), MORE_THAN(">"), EQUALS("="), UNDERSCORE("_"), TILDE("~");
 
   private final String value;
 

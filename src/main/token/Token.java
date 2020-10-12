@@ -22,6 +22,10 @@ public abstract class Token {
     return null;
   }
 
+  public Symbol getSymbol() {
+    return null;
+  }
+
   public String getFormattedType() {
     return this.type.toString().toLowerCase();
   }

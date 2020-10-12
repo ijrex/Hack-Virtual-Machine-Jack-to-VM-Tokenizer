@@ -6,6 +6,10 @@ import tokenlib.Symbol;
 import tokenlib.TokenType;
 
 public class Match {
+  public static Boolean keyword(Token token) {
+    return token.getType() == TokenType.KEYWORD;
+  }
+
   public static Boolean keyword(Token token, Keyword expected) {
     return token.getValue() == expected.getValue();
   }
@@ -23,8 +27,25 @@ public class Match {
     return token.getValue() == expected.getValue();
   }
 
+  public static Boolean symbol(Token token, Symbol[] expected) {
+    for (Symbol keyword : expected) {
+      if (symbol(token, keyword)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public static Boolean identifier(Token token) {
     return token.getType() == TokenType.IDENTIFIER;
+  }
+
+  public static Boolean stringConst(Token token) {
+    return token.getType() == TokenType.STRING_CONST;
+  }
+
+  public static Boolean intConst(Token token) {
+    return token.getType() == TokenType.INT_CONST;
   }
 
   public static Boolean type(Token token) {

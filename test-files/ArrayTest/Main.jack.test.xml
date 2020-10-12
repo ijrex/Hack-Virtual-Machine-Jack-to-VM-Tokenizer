@@ -38,16 +38,17 @@
 					<identifier> length </identifier>
 					<symbol> = </symbol>
 					<expression>
-(looking ahead...)Keyboard
-Keyboard
-.
+						<term>
+							(look ahead `Keyboard`)
+							<identifier> Keyboard </identifier>
+							<symbol> . </symbol>
+						</term>
 					</expression>
 				</letStatement>
 			</statements>
 		</subroutineBody>
 	</subroutineDec>
 </class>
-...
 ...
 ...
 ...

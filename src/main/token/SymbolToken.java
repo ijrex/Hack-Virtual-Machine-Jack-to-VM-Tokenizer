@@ -4,8 +4,15 @@ import tokenlib.*;
 
 public class SymbolToken extends Token {
 
-  public SymbolToken(String value) {
+  Symbol symbol;
+
+  public SymbolToken(String value, Symbol _symbol) {
     super(value);
     this.type = TokenType.SYMBOL;
+    this.symbol = _symbol;
+  }
+
+  public Symbol getSymbol() {
+    return symbol;
   }
 }
