@@ -16,9 +16,8 @@ public class Match {
 
   public static Boolean keyword(Token token, Keyword[] expected) {
     for (Keyword keyword : expected) {
-      if (keyword(token, keyword)) {
+      if (keyword(token, keyword))
         return true;
-      }
     }
     return false;
   }
@@ -56,6 +55,12 @@ public class Match {
     if (identifier(token)) {
       return true;
     }
+    return false;
+  }
+
+  public static Boolean type(Token token, Keyword key) {
+    if (type(token) || keyword(token, key))
+      return true;
     return false;
   }
 
