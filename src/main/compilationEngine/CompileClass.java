@@ -15,12 +15,14 @@ public class CompileClass extends Compile {
   public CompileClass(int _tab) {
     super(_tab);
     wrapperLabel = "class";
+
+    development = true;
   }
 
   public String handleToken(Token token) throws IOException {
     switch (pos) {
       case -1:
-        return pre(token);
+        return prefix(token);
       case 0:
         return parseToken(token, Match.keyword(token, Keyword.CLASS));
       case 1:
@@ -34,7 +36,7 @@ public class CompileClass extends Compile {
         return handleChildClass(compileDec, token);
 
       default:
-        return exit();
+        return fail();
     }
   }
 }

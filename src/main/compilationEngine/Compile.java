@@ -7,7 +7,7 @@ import java.io.IOException;
 import compilationEngine.util.*;
 
 public abstract class Compile {
-  boolean development = true;
+  boolean development = false;
   int tab;
   int pos = -1;
   boolean finished = false;
@@ -48,20 +48,39 @@ public abstract class Compile {
     return "\t".repeat(tab + modifier);
   }
 
-  protected String pre(Token token) throws IOException {
-    pos = 0;
+  /* Prefix */
+
+  protected String prefix(Token token, int newPos) throws IOException {
+    pos = newPos;
     tab++;
     return tabs(-1) + "<" + wrapperLabel + ">\n" + handleToken(token);
   }
 
-  protected String post() {
-    finished = true;
-    return tabs(-1) + "</" + wrapperLabel + (development ? " ." : "") + ">" + "\n";
+  protected String prefix(Token token) throws IOException {
+    return prefix(token, 0);
   }
 
-  protected String exit() throws IOException {
+  /* Postfix */
+
+  /*
+   * Subclass routines close out naturally on `exit` in development mode, this is
+   * flagged in the XML output with a trailing `.`
+   */
+
+  protected String postfix(Boolean fakeClosure) {
+    finished = true;
+    return tabs(-1) + "</" + wrapperLabel + (fakeClosure ? " . " : "") + ">" + "\n";
+  }
+
+  protected String postfix() {
+    return postfix(false);
+  }
+
+  /* Fail */
+
+  protected String fail() throws IOException {
     if (development) {
-      return post();
+      return postfix(true);
     } else {
       throw new IOException("ERROR: Failed while parsing " + this.getClass());
     }
