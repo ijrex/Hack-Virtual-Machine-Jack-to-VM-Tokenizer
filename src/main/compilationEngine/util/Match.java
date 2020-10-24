@@ -64,6 +64,18 @@ public class Match {
     return false;
   }
 
+  public static Boolean keywordConst(Token token) {
+    Keyword[] expected = new Keyword[] { Keyword.TRUE, Keyword.FALSE, Keyword.NULL, Keyword.THIS };
+
+    return keyword(token, expected);
+  }
+
+  public static Boolean unaryOp(Token token) {
+    Symbol[] expected = new Symbol[] { Symbol.PLUS, Symbol.TILDE };
+
+    return symbol(token, expected);
+  }
+
   public static Boolean isSubroutineDec(Token token) {
     Keyword[] expected = new Keyword[] { Keyword.CONSTRUCTOR, Keyword.FUNCTION, Keyword.METHOD };
 

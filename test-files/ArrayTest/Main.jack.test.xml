@@ -33,13 +33,19 @@
 				<symbol> ; </symbol>
 			</varDec>
 			<statements>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> length </identifier>
+					<symbol> = </symbol>
+					<expression>
+						<term>
+						</term . >
+					</expression . >
+				</letStatement . >
 			</statements . >
 		</subroutineBody . >
 	</subroutineDec . >
 </class . >
-...
-...
-...
 ...
 ...
 ...

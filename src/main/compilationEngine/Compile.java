@@ -24,7 +24,7 @@ public abstract class Compile {
       return tabs() + Parse.token(token);
     }
 
-    throw new IOException("ERROR: parsing \"" + token.getValue() + "\"");
+    throw new IOException(parseTokenError(token));
   }
 
   protected String parseToken(Token token, Boolean pass, int nextPos) throws IOException {
@@ -33,7 +33,11 @@ public abstract class Compile {
       return tabs() + Parse.token(token);
     }
 
-    throw new IOException("ERROR: parsing \"" + token.getValue() + "\"");
+    throw new IOException(parseTokenError(token));
+  }
+
+  private String parseTokenError(Token token) {
+    return "ERROR: Cannot parse \"" + token.getValue() + "\", pos = " + pos;
   }
 
   protected Boolean isComplete() {
