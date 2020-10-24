@@ -1,6 +1,7 @@
 package compilationEngine;
 
 import token.*;
+import tokenlib.Keyword;
 import tokenlib.Symbol;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import compilationEngine.util.*;
 public class CompileSubroutineBody extends Compile {
 
   Compile compileVarDec;
-  int varDecPos = 0;
+  Compile compileStatements;
 
   public CompileSubroutineBody(int _tab) {
     super(_tab);
@@ -26,7 +27,22 @@ public class CompileSubroutineBody extends Compile {
       case 0:
         return parseToken(token, Match.symbol(token, Symbol.BRACE_L));
       case 1:
-        // TODO: Handle Var Decs
+        if (Match.keyword(token, Keyword.VAR) && compileVarDec == null)
+          compileVarDec = new CompileVarDec(tab);
+        if (compileVarDec != null)
+          return handleChildClass(compileVarDec, token);
+        pos++;
+      case 2:
+        if (Match.keyword(token, Keyword.VAR)) {
+          compileVarDec = null;
+          pos--;
+          return handleToken(token);
+        }
+        pos++;
+      case 3:
+        if (compileStatements == null)
+          compileStatements = new CompileStatements(tab);
+        return handleChildClass(compileStatements, token);
       default:
         return fail();
     }

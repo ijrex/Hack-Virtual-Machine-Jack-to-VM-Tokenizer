@@ -1,8 +1,12 @@
 package compilationEngine;
 
 import token.*;
+import tokenlib.Keyword;
+import tokenlib.Symbol;
 
 import java.io.IOException;
+
+import compilationEngine.util.Match;
 
 public class CompileVarDec extends Compile {
 
@@ -15,8 +19,21 @@ public class CompileVarDec extends Compile {
 
   public String handleToken(Token token) throws IOException {
     switch (pos) {
+      case -2:
+        return postfix();
       case -1:
         return prefix(token);
+      case 0:
+        return parseToken(token, Match.keyword(token, Keyword.VAR));
+      case 1:
+        return parseToken(token, Match.type(token));
+      case 2:
+        return parseToken(token, Match.identifier(token));
+      case 3:
+        if (Match.symbol(token, Symbol.COMMA))
+          return parseToken(token, true, 2);
+        if (Match.symbol(token, Symbol.SEMI_COLON))
+          return parseToken(token, true, -2);
       default:
         return fail();
     }

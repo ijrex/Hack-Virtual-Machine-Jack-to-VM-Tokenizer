@@ -90,6 +90,8 @@ public abstract class Compile {
     throw new IOException();
   }
 
+  /* Handle Child Class */
+
   protected String handleChildClass(Compile compiler, Token token) throws IOException {
     if (!compiler.isComplete()) {
       String str = compiler.handleToken(token);
@@ -99,6 +101,14 @@ public abstract class Compile {
       }
       return str;
     }
-    throw new IOException("ERROR: parsing \"" + token.getValue() + "\"");
+    throw new IOException(childClassError(token, compiler));
+  }
+
+  private String childClassError(Token token, Compile compiler) {
+    String str = "\n";
+    str += "ERROR: Cannot parse \"" + token.getValue() + "\"\n";
+    str += "ERROR (Continued): Handling child class \"" + compiler.getClass() + "\"";
+
+    return str;
   }
 }
