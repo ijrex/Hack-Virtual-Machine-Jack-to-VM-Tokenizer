@@ -10,8 +10,9 @@ import compilationEngine.util.*;
 
 public class CompileTerm extends Compile {
 
-  Compile term1;
-  String lookahead;
+  Compile compileExpressionList;
+
+  Token lookAhead;
 
   public CompileTerm(int _tab) {
     super(_tab);
@@ -31,13 +32,47 @@ public class CompileTerm extends Compile {
           return parseToken(token, true);
         pos++;
       case 1:
-        if (Match.intConst(token) || Match.stringConst(token) || Match.keywordConst(token)) {
-          // TODO: Handle this
-        }
+        if (Match.intConst(token) || Match.stringConst(token) || Match.keywordConst(token))
+          return parseToken(token, true, -2);
         if (Match.identifier(token)) {
-          // TODO: Handle lookahead
+          lookAhead = token;
+          pos++;
+          return "";
         }
+        // TODO: Handle this
+        return fail();
+      case 2:
+        if (lookAhead != null) {
+          Symbol symbol = token.getSymbol();
 
+          switch (symbol) {
+            case BRACKET_L:
+              // TODO: Look for expression
+              break;
+            case PERIOD:
+              return parseToken(lookAhead, true) + parseToken(token, true, 100);
+            case PARENTHESIS_L:
+              // TODO: Look for expression list
+              break;
+            default:
+              // TODO: Look for expression
+              break;
+          }
+        }
+        // TODO: Handle this
+        return fail();
+      case 100:
+        return parseToken(token, Match.identifier(token));
+      case 101:
+        return parseToken(token, Match.symbol(token, Symbol.PARENTHESIS_L));
+      case 102:
+        if (compileExpressionList == null)
+          compileExpressionList = new CompileExpressionList(tab);
+        return handleChildClass(compileExpressionList, token);
+      case 103:
+        return parseToken(token, Match.symbol(token, Symbol.PARENTHESIS_R));
+      case 104:
+        return postfix();
       default:
         return fail();
     }

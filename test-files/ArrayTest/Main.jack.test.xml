@@ -39,20 +39,26 @@
 					<symbol> = </symbol>
 					<expression>
 						<term>
-						</term . >
-					</expression . >
+							<identifier> Keyboard </identifier>
+							<symbol> . </symbol>
+							<identifier> readInt </identifier>
+							<symbol> ( </symbol>
+							<expressionList>
+								<expression>
+									<term>
+										<string_const> "HOW MANY NUMBERS? " </string_const>
+									</term>
+								</expression>
+							</expressionList>
+							<symbol> ) </symbol>
+						</term>
+					</expression>
+					<symbol> ; </symbol>
 				</letStatement . >
 			</statements . >
 		</subroutineBody . >
 	</subroutineDec . >
 </class . >
-...
-...
-...
-...
-...
-...
-...
 ...
 ...
 ...

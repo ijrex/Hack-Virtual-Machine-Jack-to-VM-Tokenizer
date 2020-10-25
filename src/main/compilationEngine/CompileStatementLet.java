@@ -43,6 +43,8 @@ public class CompileStatementLet extends Compile {
         if (expression2 == null)
           expression2 = new CompileExpression(tab);
         return handleChildClass(expression2, token);
+      case 6:
+        return parseToken(token, Match.symbol(token, Symbol.SEMI_COLON));
       default:
         return fail();
     }

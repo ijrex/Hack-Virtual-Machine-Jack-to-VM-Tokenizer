@@ -70,6 +70,13 @@ public class Match {
     return keyword(token, expected);
   }
 
+  public static Boolean op(Token token) {
+    Symbol[] expected = new Symbol[] { Symbol.PLUS, Symbol.MINUS, Symbol.ASTERISK, Symbol.SLASH_FWD, Symbol.AMPERSAND,
+        Symbol.PIPE, Symbol.LESS_THAN, Symbol.MORE_THAN, Symbol.EQUALS };
+
+    return symbol(token, expected);
+  }
+
   public static Boolean unaryOp(Token token) {
     Symbol[] expected = new Symbol[] { Symbol.PLUS, Symbol.TILDE };
 
