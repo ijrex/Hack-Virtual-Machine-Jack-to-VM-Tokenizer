@@ -54,6 +54,8 @@ public class CompileTerm extends Compile {
             case PARENTHESIS_L:
               // TODO: Look for expression list
               break;
+            case PARENTHESIS_R:
+              return parseToken(lookAhead, true) + postfix();
             default:
               // TODO: Look for expression
               break;

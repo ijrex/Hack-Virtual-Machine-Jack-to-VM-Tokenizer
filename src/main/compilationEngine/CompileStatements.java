@@ -44,9 +44,14 @@ public class CompileStatements extends Compile {
         }
         if (compileStatement != null)
           return handleChildClass(compileStatement, token);
+      case 1:
+        if (Match.isStatementDec(token) && compileStatement != null) {
+          compileStatement = null;
+          pos--;
+          return handleToken(token);
+        }
       default:
-        // TODO: Exit if no statements
-        return fail();
+        return postfix();
     }
   }
 

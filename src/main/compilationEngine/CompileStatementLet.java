@@ -22,6 +22,8 @@ public class CompileStatementLet extends Compile {
 
   public String handleToken(Token token) throws IOException {
     switch (pos) {
+      case -2:
+        return postfix();
       case -1:
         return prefix(token);
       case 0:
@@ -44,7 +46,7 @@ public class CompileStatementLet extends Compile {
           expression2 = new CompileExpression(tab);
         return handleChildClass(expression2, token);
       case 6:
-        return parseToken(token, Match.symbol(token, Symbol.SEMI_COLON));
+        return parseToken(token, Match.symbol(token, Symbol.SEMI_COLON), -2);
       default:
         return fail();
     }
