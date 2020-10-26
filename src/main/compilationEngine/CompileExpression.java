@@ -32,9 +32,12 @@ public class CompileExpression extends Compile {
         return handleChildClass(compileTerm1, token);
       case 1:
         if (Match.op(token)) {
-          // TODO: Handle Op + compileTerm2
+          compileTerm2 = new CompileTerm(tab);
+          return parseToken(token, true);
         }
         return postfix();
+      case 2:
+        return handleChildClass(compileTerm2, token);
       default:
         return fail();
     }

@@ -33,7 +33,8 @@ public class CompileStatements extends Compile {
             case IF:
               // TODO: Handle `if`
             case WHILE:
-              // TODO: Handle `while`
+              compileStatement = new CompileStatementWhile(tab);
+              break;
             case DO:
               // TODO: Handle `do`
             case RETURN:

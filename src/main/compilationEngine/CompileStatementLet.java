@@ -10,8 +10,8 @@ import compilationEngine.util.*;
 
 public class CompileStatementLet extends Compile {
 
-  Compile expression1;
-  Compile expression2;
+  Compile compileExpression1;
+  Compile compileExpression2;
 
   public CompileStatementLet(int _tab) {
     super(_tab);
@@ -31,20 +31,23 @@ public class CompileStatementLet extends Compile {
       case 1:
         return parseToken(token, Match.identifier(token));
       case 2:
-        if (Match.symbol(token, Symbol.BRACKET_L)) {
-          // TODO: expression1
+        if (compileExpression1 == null && Match.symbol(token, Symbol.BRACKET_L)) {
+          compileExpression1 = new CompileExpression(tab);
+          return parseToken(token, true, 2);
         }
+        if (compileExpression1 != null)
+          return handleChildClass(compileExpression1, token);
         pos++;
       case 3:
-        if (expression1 != null)
+        if (compileExpression1 != null)
           return parseToken(token, Match.symbol(token, Symbol.BRACKET_R));
         pos++;
       case 4:
         return parseToken(token, Match.symbol(token, Symbol.EQUALS));
       case 5:
-        if (expression2 == null)
-          expression2 = new CompileExpression(tab);
-        return handleChildClass(expression2, token);
+        if (compileExpression2 == null)
+          compileExpression2 = new CompileExpression(tab);
+        return handleChildClass(compileExpression2, token);
       case 6:
         return parseToken(token, Match.symbol(token, Symbol.SEMI_COLON), -2);
       default:
