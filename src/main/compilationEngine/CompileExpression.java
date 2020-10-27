@@ -38,6 +38,8 @@ public class CompileExpression extends Compile {
         return postfix();
       case 2:
         return handleChildClass(compileTerm2, token);
+      case 3:
+        return postfix();
       default:
         return fail();
     }

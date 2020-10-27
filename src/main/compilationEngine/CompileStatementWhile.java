@@ -44,6 +44,8 @@ public class CompileStatementWhile extends Compile {
         return handleChildClass(compileStatements, token);
       case 6:
         return parseToken(token, Match.symbol(token, Symbol.BRACE_R));
+      case 7:
+        return postfix();
       default:
         return fail();
     }

@@ -11,6 +11,7 @@ import compilationEngine.util.*;
 public class CompileTerm extends Compile {
 
   Compile compileExpressionList;
+  Compile compileExpression;
 
   Token lookAhead;
 
@@ -46,11 +47,10 @@ public class CompileTerm extends Compile {
           Symbol symbol = token.getSymbol();
 
           switch (symbol) {
-            case BRACKET_L:
-              // TODO: Look for expression
-              break;
             case PERIOD:
               return parseToken(lookAhead, true) + parseToken(token, true, 100);
+            case BRACKET_L:
+              return parseToken(lookAhead, true) + parseToken(token, true, 200);
             case PARENTHESIS_L:
               // TODO: Look for expression list
               break;
@@ -73,6 +73,16 @@ public class CompileTerm extends Compile {
         return parseToken(token, Match.symbol(token, Symbol.PARENTHESIS_R));
       case 104:
         return postfix();
+
+      case 200:
+        if (compileExpression == null)
+          compileExpression = new CompileExpression(tab);
+        return handleChildClass(compileExpression, token);
+      case 201:
+        return parseToken(token, Match.symbol(token, Symbol.BRACKET_R));
+      case 202:
+        return postfix();
+
       default:
         return fail();
     }
