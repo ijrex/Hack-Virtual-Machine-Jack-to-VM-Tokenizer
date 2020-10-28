@@ -36,9 +36,11 @@ public class CompileStatements extends Compile {
               compileStatement = new CompileStatementWhile(tab);
               break;
             case DO:
-              // TODO: Handle `do`
+              compileStatement = new CompileStatementDo(tab);
+              break;
             case RETURN:
-              // TODO: Handle `return`
+              compileStatement = new CompileStatementReturn(tab);
+              break;
             default:
               fail();
           }
