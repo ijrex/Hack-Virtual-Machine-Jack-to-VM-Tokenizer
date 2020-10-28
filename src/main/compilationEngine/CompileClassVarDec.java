@@ -8,24 +8,23 @@ import java.io.IOException;
 
 import compilationEngine.util.Match;
 
-public class CompileVarDec extends Compile {
+public class CompileClassVarDec extends Compile {
 
-  public CompileVarDec(int _tab) {
+  public CompileClassVarDec(int _tab) {
     super(_tab);
-    wrapperLabel = "varDec";
+    wrapperLabel = "classVarDec";
 
     development = true;
   }
 
   public String handleToken(Token token) throws IOException {
     switch (pos) {
-      case -2:
-        // TODO: Clean-up -2 cases
-        return postfix();
       case -1:
         return prefix(token);
       case 0:
-        return parseToken(token, Match.keyword(token, Keyword.VAR));
+        if (Match.isClassVarDec(token))
+          return parseToken(token, true);
+        return fail();
       case 1:
         return parseToken(token, Match.type(token));
       case 2:
@@ -34,7 +33,10 @@ public class CompileVarDec extends Compile {
         if (Match.symbol(token, Symbol.COMMA))
           return parseToken(token, true, 2);
         if (Match.symbol(token, Symbol.SEMI_COLON))
-          return parseToken(token, true, -2);
+          return parseToken(token, true, 4);
+        return fail();
+      case 4:
+        return postfix();
       default:
         return fail();
     }

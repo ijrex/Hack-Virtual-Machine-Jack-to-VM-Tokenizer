@@ -10,7 +10,8 @@ import compilationEngine.util.*;
 
 public class CompileClass extends Compile {
 
-  Compile compileDec;
+  Compile compileClassVarDec;
+  Compile compileSubroutineDec;
 
   public CompileClass(int _tab) {
     super(_tab);
@@ -30,11 +31,31 @@ public class CompileClass extends Compile {
       case 2:
         return parseToken(token, Match.symbol(token, Symbol.BRACE_L));
       case 3:
-        // TODO: Parse class var dec or subroutine dec
-        if (compileDec == null)
-          compileDec = new CompileSubroutineDec(tab);
-        return handleChildClass(compileDec, token);
-
+        if (Match.isClassVarDec(token) && compileClassVarDec == null)
+          compileClassVarDec = new CompileClassVarDec(tab);
+        if (compileClassVarDec != null)
+          return handleChildClass(compileClassVarDec, token);
+        pos++;
+      case 4:
+        if (Match.isClassVarDec(token) && compileClassVarDec != null) {
+          compileClassVarDec = null;
+          pos--;
+          return handleToken(token);
+        }
+        pos++;
+      case 5:
+        if (Match.isSubroutineDec(token) && compileSubroutineDec == null)
+          compileSubroutineDec = new CompileSubroutineDec(tab);
+        if (compileSubroutineDec != null)
+          return handleChildClass(compileSubroutineDec, token);
+        pos++;
+      case 6:
+        if (Match.isSubroutineDec(token) && compileSubroutineDec != null) {
+          compileSubroutineDec = null;
+          pos--;
+          return handleToken(token);
+        }
+        pos++;
       default:
         return fail();
     }
