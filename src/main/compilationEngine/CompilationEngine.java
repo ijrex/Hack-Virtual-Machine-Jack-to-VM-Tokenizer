@@ -13,7 +13,9 @@ public class CompilationEngine {
 
   public String parseToken(Token token) throws IOException {
     if (!compileClass.finished) {
-      return compileClass.handleToken(token);
+      String str = compileClass.handleToken(token);
+      // System.out.println(str);
+      return str;
     }
     return "...\n";
   }

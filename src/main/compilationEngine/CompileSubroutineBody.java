@@ -43,6 +43,8 @@ public class CompileSubroutineBody extends Compile {
         if (compileStatements == null)
           compileStatements = new CompileStatements(tab);
         return handleChildClass(compileStatements, token);
+      case 4:
+        return parseToken(token, Match.symbol(token, Symbol.BRACE_R));
       default:
         return fail();
     }

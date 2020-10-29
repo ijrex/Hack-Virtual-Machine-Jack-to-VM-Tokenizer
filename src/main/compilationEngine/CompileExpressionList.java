@@ -33,7 +33,9 @@ public class CompileExpressionList extends Compile {
         return handleChildClass(compileExpression, token);
       case 1:
         if (Match.symbol(token, Symbol.COMMA)) {
-          // TODO: Handle extra expression
+          compileExpression = null;
+          pos--;
+          return parseToken(token, true, 0);
         }
         return postfix();
       default:
