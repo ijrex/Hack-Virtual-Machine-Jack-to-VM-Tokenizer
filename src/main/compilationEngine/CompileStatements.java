@@ -31,7 +31,8 @@ public class CompileStatements extends Compile {
               compileStatement = new CompileStatementLet(tab);
               break;
             case IF:
-              // TODO: Handle `if`
+              compileStatement = new CompileStatementIf(tab);
+              break;
             case WHILE:
               compileStatement = new CompileStatementWhile(tab);
               break;

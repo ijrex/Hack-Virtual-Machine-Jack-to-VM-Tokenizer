@@ -40,6 +40,8 @@ public class CompileTerm extends Compile {
           pos++;
           return "";
         }
+        if (Match.symbol(token, Symbol.PARENTHESIS_L))
+          return parseToken(token, true, 300);
         // TODO: Handle this
         return fail();
       case 2:
@@ -81,6 +83,15 @@ public class CompileTerm extends Compile {
       case 201:
         return parseToken(token, Match.symbol(token, Symbol.BRACKET_R));
       case 202:
+        return postfix();
+
+      case 300:
+        if (compileExpression == null)
+          compileExpression = new CompileExpression(tab);
+        return handleChildClass(compileExpression, token);
+      case 301:
+        return parseToken(token, Match.symbol(token, Symbol.PARENTHESIS_R));
+      case 302:
         return postfix();
 
       default:
