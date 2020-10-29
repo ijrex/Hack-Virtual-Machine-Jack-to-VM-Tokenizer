@@ -19,7 +19,7 @@ public class TokenTypeLib {
   public TokenTypeLib() {
     keywordPat = Pattern.compile(Util.getKeywordReg());
     symbolPat = Pattern.compile(Util.getSymbolReg());
-    intConstPat = Pattern.compile("^\\d");
+    intConstPat = Pattern.compile("^\\d+");
     stringConstPat = Pattern.compile("^\"[^\"]*\"");
     identifierPat = Pattern.compile("^[A-Za-z][\\w]*");
 
