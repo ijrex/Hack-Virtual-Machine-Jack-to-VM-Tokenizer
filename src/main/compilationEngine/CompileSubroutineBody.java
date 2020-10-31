@@ -45,6 +45,8 @@ public class CompileSubroutineBody extends Compile {
         return handleChildClass(compileStatements, token);
       case 4:
         return parseToken(token, Match.symbol(token, Symbol.BRACE_R));
+      case 5:
+        return postfix();
       default:
         return fail();
     }

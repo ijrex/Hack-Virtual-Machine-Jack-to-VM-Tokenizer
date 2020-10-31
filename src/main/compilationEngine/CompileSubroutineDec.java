@@ -42,6 +42,8 @@ public class CompileSubroutineDec extends Compile {
         if (compileSubroutineBody == null)
           compileSubroutineBody = new CompileSubroutineBody(tab);
         return handleChildClass(compileSubroutineBody, token);
+      case 7:
+        return postfix();
       default:
         return fail();
     }
