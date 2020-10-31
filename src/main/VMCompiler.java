@@ -5,8 +5,9 @@ class VMCompiler {
 
   public static void main(String[] args) {
 
-    LoadFiles files = new LoadFiles("../../test-files/Square", "jack");
-    System.out.println(System.getProperty("user.dir"));
+    String dir = "../../test-files/Square";
+
+    LoadFiles files = new LoadFiles(dir, "jack");
 
     Tokenizer tokenizer = new Tokenizer(files);
 

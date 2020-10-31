@@ -320,7 +320,9 @@
 					<expression>
 						<term>
 							<symbol> ~ </symbol>
-							<identifier> exit </identifier>
+							<term>
+								<identifier> exit </identifier>
+							</term>
 						</term>
 					</expression>
 					<symbol> ) </symbol>
@@ -579,17 +581,19 @@
 							<expression>
 								<term>
 									<symbol> ~ </symbol>
-									<symbol> ( </symbol>
-									<expression>
-										<term>
-											<identifier> key </identifier>
-										</term>
-										<symbol> = </symbol>
-										<term>
-											<int_const> 0 </int_const>
-										</term>
-									</expression>
-									<symbol> ) </symbol>
+									<term>
+										<symbol> ( </symbol>
+										<expression>
+											<term>
+												<identifier> key </identifier>
+											</term>
+											<symbol> = </symbol>
+											<term>
+												<int_const> 0 </int_const>
+											</term>
+										</expression>
+										<symbol> ) </symbol>
+									</term>
 								</term>
 							</expression>
 							<symbol> ) </symbol>

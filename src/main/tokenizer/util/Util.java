@@ -2,8 +2,9 @@ package tokenizer.util;
 
 public class Util {
   public static String getOutputFilePath(String pathName) {
-    String fileName = pathName.substring(pathName.lastIndexOf("/"));
-    return pathName + fileName + ".temp.xml";
+    String file = pathName.substring(pathName.lastIndexOf("/") + 1);
+    String fileName = file.substring(0, file.lastIndexOf("."));
+    return pathName.replace(file, fileName + ".test.xml");
   }
 
   public static String trimExcess(String str, Boolean multilineComment, Boolean multilineCommentEnd) {
