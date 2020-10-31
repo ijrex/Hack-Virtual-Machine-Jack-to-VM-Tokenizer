@@ -50,7 +50,7 @@ public class Tokenizer {
     try {
       Scanner fileScanner = new Scanner(sourceFile);
 
-      FileWriter fileWriter = new FileWriter("../../test-files/ArrayTest/" + sourceFile.getName() + ".test.xml", false);
+      FileWriter fileWriter = new FileWriter("../../test-files/Square/" + sourceFile.getName() + ".test.xml", false);
 
       Boolean multilineComment = false;
 
@@ -73,6 +73,7 @@ public class Tokenizer {
         }
       }
 
+      compilationEngine.reset();
       fileWriter.close();
       fileScanner.close();
 

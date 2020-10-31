@@ -56,6 +56,8 @@ public class CompileClass extends Compile {
           return handleToken(token);
         }
         pos++;
+      case 7:
+        return parseToken(token, Match.symbol(token, Symbol.BRACE_R)) + postfix();
       default:
         return fail();
     }
