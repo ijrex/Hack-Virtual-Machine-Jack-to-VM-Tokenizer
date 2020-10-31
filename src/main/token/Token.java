@@ -14,6 +14,10 @@ public abstract class Token {
     return value;
   }
 
+  public String printValue() {
+    return value;
+  }
+
   public TokenType getType() {
     return type;
   }
