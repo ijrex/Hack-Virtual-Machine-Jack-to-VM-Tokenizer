@@ -20,8 +20,6 @@ public class CompileExpression extends Compile {
 
   public String handleToken(Token token) throws IOException {
     switch (pos) {
-      case -2:
-        return postfix();
       case -1:
         return prefix(token);
       case 0:
