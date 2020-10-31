@@ -17,8 +17,6 @@ public class CompileStatementIf extends Compile {
   public CompileStatementIf(int _tab) {
     super(_tab);
     wrapperLabel = "ifStatement";
-
-    development = true;
   }
 
   public String handleToken(Token token) throws IOException {
@@ -55,6 +53,8 @@ public class CompileStatementIf extends Compile {
         return handleChildClass(compileStatements2, token);
       case 10:
         return parseToken(token, Match.symbol(token, Symbol.BRACE_R));
+      case 11:
+        return postfix();
       default:
         return fail();
     }

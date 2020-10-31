@@ -16,8 +16,6 @@ public class CompileStatementWhile extends Compile {
   public CompileStatementWhile(int _tab) {
     super(_tab);
     wrapperLabel = "whileStatement";
-
-    development = true;
   }
 
   public String handleToken(Token token) throws IOException {

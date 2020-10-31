@@ -15,8 +15,6 @@ public class CompileStatementDo extends Compile {
   public CompileStatementDo(int _tab) {
     super(_tab);
     wrapperLabel = "doStatement";
-
-    development = true;
   }
 
   public String handleToken(Token token) throws IOException {

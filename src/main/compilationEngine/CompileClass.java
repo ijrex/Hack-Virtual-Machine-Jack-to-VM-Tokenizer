@@ -16,8 +16,6 @@ public class CompileClass extends Compile {
   public CompileClass(int _tab) {
     super(_tab);
     wrapperLabel = "class";
-
-    development = true;
   }
 
   public String handleToken(Token token) throws IOException {

@@ -13,8 +13,6 @@ public class CompileClassVarDec extends Compile {
   public CompileClassVarDec(int _tab) {
     super(_tab);
     wrapperLabel = "classVarDec";
-
-    development = true;
   }
 
   public String handleToken(Token token) throws IOException {

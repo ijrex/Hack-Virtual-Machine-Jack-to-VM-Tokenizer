@@ -16,8 +16,6 @@ public class CompileExpression extends Compile {
   public CompileExpression(int _tab) {
     super(_tab);
     wrapperLabel = "expression";
-
-    development = true;
   }
 
   public String handleToken(Token token) throws IOException {

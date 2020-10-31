@@ -15,8 +15,6 @@ public class CompileSubroutineDec extends Compile {
   public CompileSubroutineDec(int _tab) {
     super(_tab);
     wrapperLabel = "subroutineDec";
-
-    development = true;
   }
 
   public String handleToken(Token token) throws IOException {

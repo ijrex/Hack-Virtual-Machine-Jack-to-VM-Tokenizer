@@ -16,8 +16,6 @@ public class CompileSubroutineBody extends Compile {
   public CompileSubroutineBody(int _tab) {
     super(_tab);
     wrapperLabel = "subroutineBody";
-
-    development = true;
   }
 
   public String handleToken(Token token) throws IOException {

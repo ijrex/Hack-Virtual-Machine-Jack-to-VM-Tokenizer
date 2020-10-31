@@ -16,8 +16,6 @@ public class CompileStatementLet extends Compile {
   public CompileStatementLet(int _tab) {
     super(_tab);
     wrapperLabel = "letStatement";
-
-    development = true;
   }
 
   public String handleToken(Token token) throws IOException {
