@@ -18,6 +18,10 @@ public abstract class Token {
     return type;
   }
 
+  public String getLabel() {
+    return null;
+  }
+
   public Keyword getKeyword() {
     return null;
   }

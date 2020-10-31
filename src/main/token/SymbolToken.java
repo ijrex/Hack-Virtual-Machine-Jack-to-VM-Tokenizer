@@ -12,6 +12,10 @@ public class SymbolToken extends Token {
     this.symbol = _symbol;
   }
 
+  public String getLabel() {
+    return "symbol";
+  }
+
   public Symbol getSymbol() {
     return symbol;
   }

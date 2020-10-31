@@ -15,4 +15,8 @@ public class KeywordToken extends Token {
   public Keyword getKeyword() {
     return keyword;
   }
+
+  public String getLabel() {
+    return "keyword";
+  }
 }
