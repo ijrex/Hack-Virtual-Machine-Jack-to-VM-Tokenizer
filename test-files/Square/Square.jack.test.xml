@@ -88,8 +88,8 @@
 				</returnStatement>
 			</statements>
 			<symbol> } </symbol>
-		</subroutineBody . >
-	</subroutineDec . >
+		</subroutineBody>
+	</subroutineDec>
 	<subroutineDec>
 		<keyword> method </keyword>
 		<keyword> void </keyword>
@@ -123,8 +123,8 @@
 				</returnStatement>
 			</statements>
 			<symbol> } </symbol>
-		</subroutineBody . >
-	</subroutineDec . >
+		</subroutineBody>
+	</subroutineDec>
 	<subroutineDec>
 		<keyword> method </keyword>
 		<keyword> void </keyword>
@@ -200,8 +200,8 @@
 				</returnStatement>
 			</statements>
 			<symbol> } </symbol>
-		</subroutineBody . >
-	</subroutineDec . >
+		</subroutineBody>
+	</subroutineDec>
 	<subroutineDec>
 		<keyword> method </keyword>
 		<keyword> void </keyword>
@@ -277,8 +277,8 @@
 				</returnStatement>
 			</statements>
 			<symbol> } </symbol>
-		</subroutineBody . >
-	</subroutineDec . >
+		</subroutineBody>
+	</subroutineDec>
 	<subroutineDec>
 		<keyword> method </keyword>
 		<keyword> void </keyword>
@@ -380,15 +380,15 @@
 						</doStatement>
 					</statements>
 					<symbol> } </symbol>
-				</ifStatement . >
+				</ifStatement>
 				<returnStatement>
 					<keyword> return </keyword>
 					<symbol> ; </symbol>
 				</returnStatement>
 			</statements>
 			<symbol> } </symbol>
-		</subroutineBody . >
-	</subroutineDec . >
+		</subroutineBody>
+	</subroutineDec>
 	<subroutineDec>
 		<keyword> method </keyword>
 		<keyword> void </keyword>
@@ -450,15 +450,15 @@
 						</doStatement>
 					</statements>
 					<symbol> } </symbol>
-				</ifStatement . >
+				</ifStatement>
 				<returnStatement>
 					<keyword> return </keyword>
 					<symbol> ; </symbol>
 				</returnStatement>
 			</statements>
 			<symbol> } </symbol>
-		</subroutineBody . >
-	</subroutineDec . >
+		</subroutineBody>
+	</subroutineDec>
 	<subroutineDec>
 		<keyword> method </keyword>
 		<keyword> void </keyword>
@@ -632,15 +632,15 @@
 						</doStatement>
 					</statements>
 					<symbol> } </symbol>
-				</ifStatement . >
+				</ifStatement>
 				<returnStatement>
 					<keyword> return </keyword>
 					<symbol> ; </symbol>
 				</returnStatement>
 			</statements>
 			<symbol> } </symbol>
-		</subroutineBody . >
-	</subroutineDec . >
+		</subroutineBody>
+	</subroutineDec>
 	<subroutineDec>
 		<keyword> method </keyword>
 		<keyword> void </keyword>
@@ -824,15 +824,15 @@
 						</doStatement>
 					</statements>
 					<symbol> } </symbol>
-				</ifStatement . >
+				</ifStatement>
 				<returnStatement>
 					<keyword> return </keyword>
 					<symbol> ; </symbol>
 				</returnStatement>
 			</statements>
 			<symbol> } </symbol>
-		</subroutineBody . >
-	</subroutineDec . >
+		</subroutineBody>
+	</subroutineDec>
 	<subroutineDec>
 		<keyword> method </keyword>
 		<keyword> void </keyword>
@@ -1006,15 +1006,15 @@
 						</doStatement>
 					</statements>
 					<symbol> } </symbol>
-				</ifStatement . >
+				</ifStatement>
 				<returnStatement>
 					<keyword> return </keyword>
 					<symbol> ; </symbol>
 				</returnStatement>
 			</statements>
 			<symbol> } </symbol>
-		</subroutineBody . >
-	</subroutineDec . >
+		</subroutineBody>
+	</subroutineDec>
 	<subroutineDec>
 		<keyword> method </keyword>
 		<keyword> void </keyword>
@@ -1198,13 +1198,14 @@
 						</doStatement>
 					</statements>
 					<symbol> } </symbol>
-				</ifStatement . >
+				</ifStatement>
 				<returnStatement>
 					<keyword> return </keyword>
 					<symbol> ; </symbol>
 				</returnStatement>
 			</statements>
 			<symbol> } </symbol>
-		</subroutineBody . >
-	</subroutineDec . >
-</class . >
+		</subroutineBody>
+	</subroutineDec>
+	<symbol> } </symbol>
+</class>
