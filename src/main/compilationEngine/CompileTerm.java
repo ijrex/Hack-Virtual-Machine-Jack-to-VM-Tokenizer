@@ -12,6 +12,7 @@ public class CompileTerm extends Compile {
 
   Compile compileExpressionList;
   Compile compileExpression;
+  Compile compileTerm;
 
   Token lookAhead;
 
@@ -29,10 +30,6 @@ public class CompileTerm extends Compile {
       case -1:
         return prefix(token);
       case 0:
-        if (Match.unaryOp(token))
-          return parseToken(token, true);
-        pos++;
-      case 1:
         if (Match.intConst(token) || Match.stringConst(token) || Match.keywordConst(token))
           return parseToken(token, true, -2);
         if (Match.identifier(token)) {
@@ -42,9 +39,12 @@ public class CompileTerm extends Compile {
         }
         if (Match.symbol(token, Symbol.PARENTHESIS_L))
           return parseToken(token, true, 300);
-        // TODO: Handle this
+
+        if (Match.unaryOp(token))
+          return parseToken(token, true, 400);
+
         return fail();
-      case 2:
+      case 1:
         if (lookAhead != null) {
           Symbol symbol = token.getSymbol();
 
@@ -92,6 +92,13 @@ public class CompileTerm extends Compile {
       case 301:
         return parseToken(token, Match.symbol(token, Symbol.PARENTHESIS_R));
       case 302:
+        return postfix();
+
+      case 400:
+        if (compileTerm == null)
+          compileTerm = new CompileTerm(tab);
+        return handleChildClass(compileTerm, token);
+      case 401:
         return postfix();
 
       default:
