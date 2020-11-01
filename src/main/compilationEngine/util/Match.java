@@ -78,7 +78,7 @@ public class Match {
   }
 
   public static Boolean unaryOp(Token token) {
-    Symbol[] expected = new Symbol[] { Symbol.PLUS, Symbol.TILDE };
+    Symbol[] expected = new Symbol[] { Symbol.MINUS, Symbol.TILDE };
 
     return symbol(token, expected);
   }
