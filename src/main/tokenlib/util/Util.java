@@ -8,7 +8,7 @@ public class Util {
     for (Keyword keyword : Keyword.values()) {
       reg += keyword.getValue() + "|";
     }
-    return reg.substring(0, reg.length() - 1) + ")";
+    return reg.substring(0, reg.length() - 1) + ")\\s+";
   }
 
   public static String getSymbolReg() {
