@@ -20,7 +20,7 @@ public class TokenTypeLib {
     keywordPat = Pattern.compile(Util.getKeywordReg());
     symbolPat = Pattern.compile(Util.getSymbolReg());
     intConstPat = Pattern.compile("^\\d+");
-    stringConstPat = Pattern.compile("^\"[^\"]*\"");
+    stringConstPat = Pattern.compile("^\".*\"");
     identifierPat = Pattern.compile("^[A-Za-z][\\w]*");
 
     // Populate `tokens` map with predefined keyword and
@@ -44,7 +44,7 @@ public class TokenTypeLib {
     // Check if Keyword token
     mat = keywordPat.matcher(line);
     if (mat.find())
-      return tokens.get(mat.group(0));
+      return tokens.get(mat.group(0).trim());
 
     // Check if Symbol token
     mat = symbolPat.matcher(line);
