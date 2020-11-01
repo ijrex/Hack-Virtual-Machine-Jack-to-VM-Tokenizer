@@ -1,17 +1,17 @@
 package compilationEngine;
 
 import token.*;
-import tokenlib.TokenType;
+import tokenlib.Keyword;
+import tokenlib.Symbol;
 
 import java.io.IOException;
 
-import compilationEngine.util.Match;
+import compilationEngine.util.*;
 
 public class CompileExpression extends Compile {
 
-  Compile parameterList;
-
-  Token[] lookAhead;
+  Compile compileTerm1;
+  Compile compileTerm2;
 
   public CompileExpression(int _tab) {
     super(_tab);
@@ -21,32 +21,23 @@ public class CompileExpression extends Compile {
   public String handleToken(Token token) throws IOException {
     switch (pos) {
       case -1:
-        return preface(token);
+        return prefix(token);
       case 0:
-        // Define term type
-
-        // If identifier, distinguish using lookahead if
-        // a variable, array entry or subroutine call
-        // - Variable `(...`
-        // - Array `[`
-        // - Subroutine call `.`
-        if (Match.identifier(token))
-          lookAhead = new Token[2];
-
-        if (lookAhead != null) {
-          if (lookAhead[0] == null) {
-            lookAhead[0] = token;
-            return "(looking ahead...)" + token.getValue() + "\n";
-          }
-          if (lookAhead[1] == null) {
-            pos++;
-            lookAhead[1] = token;
-            return lookAhead[0].getValue() + "\n" + token.getValue() + "\n";
-          }
+        if (compileTerm1 == null)
+          compileTerm1 = new CompileTerm(tab);
+        return handleChildClass(compileTerm1, token);
+      case 1:
+        if (Match.op(token)) {
+          compileTerm2 = new CompileTerm(tab);
+          return parseToken(token, true);
         }
-
+        return postfix();
+      case 2:
+        return handleChildClass(compileTerm2, token);
+      case 3:
+        return postfix();
       default:
-        return postface();
+        return fail();
     }
   }
 }

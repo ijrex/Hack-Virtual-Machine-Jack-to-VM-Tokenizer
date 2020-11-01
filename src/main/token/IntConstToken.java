@@ -8,4 +8,8 @@ public class IntConstToken extends Token {
     super(value);
     this.type = TokenType.INT_CONST;
   }
+
+  public String getLabel() {
+    return "integerConstant";
+  }
 }

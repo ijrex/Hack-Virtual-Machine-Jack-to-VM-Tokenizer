@@ -6,11 +6,12 @@ import tokenlib.Symbol;
 
 import java.io.IOException;
 
-import compilationEngine.util.Match;
+import compilationEngine.util.*;
 
 public class CompileStatementLet extends Compile {
 
-  Compile expression;
+  Compile compileExpression1;
+  Compile compileExpression2;
 
   public CompileStatementLet(int _tab) {
     super(_tab);
@@ -20,25 +21,35 @@ public class CompileStatementLet extends Compile {
   public String handleToken(Token token) throws IOException {
     switch (pos) {
       case -1:
-        return preface(token);
+        return prefix(token);
       case 0:
         return parseToken(token, Match.keyword(token, Keyword.LET));
       case 1:
         return parseToken(token, Match.identifier(token));
       case 2:
-        // TODO: Parse [] expression
-        if (Match.symbol(token, Symbol.BRACKET_L))
-          return "TODO";
+        if (compileExpression1 == null && Match.symbol(token, Symbol.BRACKET_L)) {
+          compileExpression1 = new CompileExpression(tab);
+          return parseToken(token, true, 2);
+        }
+        if (compileExpression1 != null)
+          return handleChildClass(compileExpression1, token);
         pos++;
       case 3:
-        return parseToken(token, Match.symbol(token, Symbol.EQUALS));
+        if (compileExpression1 != null)
+          return parseToken(token, Match.symbol(token, Symbol.BRACKET_R));
+        pos++;
       case 4:
-        if (expression == null)
-          expression = new CompileExpression(tab);
-        if (!expression.isComplete())
-          return expression.handleToken(token);
+        return parseToken(token, Match.symbol(token, Symbol.EQUALS));
+      case 5:
+        if (compileExpression2 == null)
+          compileExpression2 = new CompileExpression(tab);
+        return handleChildClass(compileExpression2, token);
+      case 6:
+        return parseToken(token, Match.symbol(token, Symbol.SEMI_COLON));
+      case 7:
+        return postfix();
       default:
-        return postface();
+        return fail();
     }
   }
 }

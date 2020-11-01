@@ -8,14 +8,14 @@ import java.io.IOException;
 
 import compilationEngine.util.*;
 
-public class CompileSubroutineBody extends Compile {
+public class CompileStatementWhile extends Compile {
 
-  Compile compileVarDec;
+  Compile compileExpression;
   Compile compileStatements;
 
-  public CompileSubroutineBody(int _tab) {
+  public CompileStatementWhile(int _tab) {
     super(_tab);
-    wrapperLabel = "subroutineBody";
+    wrapperLabel = "whileStatement";
   }
 
   public String handleToken(Token token) throws IOException {
@@ -23,31 +23,27 @@ public class CompileSubroutineBody extends Compile {
       case -1:
         return prefix(token);
       case 0:
-        return parseToken(token, Match.symbol(token, Symbol.BRACE_L));
+        return parseToken(token, Match.keyword(token, Keyword.WHILE));
       case 1:
-        if (Match.keyword(token, Keyword.VAR) && compileVarDec == null)
-          compileVarDec = new CompileVarDec(tab);
-        if (compileVarDec != null)
-          return handleChildClass(compileVarDec, token);
-        pos++;
+        return parseToken(token, Match.symbol(token, Symbol.PARENTHESIS_L));
       case 2:
-        if (Match.keyword(token, Keyword.VAR)) {
-          compileVarDec = null;
-          pos--;
-          return handleToken(token);
-        }
-        pos++;
+        if (compileExpression == null)
+          compileExpression = new CompileExpression(tab);
+        return handleChildClass(compileExpression, token);
       case 3:
+        return parseToken(token, Match.symbol(token, Symbol.PARENTHESIS_R));
+      case 4:
+        return parseToken(token, Match.symbol(token, Symbol.BRACE_L));
+      case 5:
         if (compileStatements == null)
           compileStatements = new CompileStatements(tab);
         return handleChildClass(compileStatements, token);
-      case 4:
+      case 6:
         return parseToken(token, Match.symbol(token, Symbol.BRACE_R));
-      case 5:
+      case 7:
         return postfix();
       default:
         return fail();
     }
   }
-
 }

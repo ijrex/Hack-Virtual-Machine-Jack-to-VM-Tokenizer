@@ -6,21 +6,24 @@ import tokenlib.Symbol;
 
 import java.io.IOException;
 
-import compilationEngine.util.*;
+import compilationEngine.util.Match;
 
 public class CompileVarDec extends Compile {
-
-  Compile parameterList;
 
   public CompileVarDec(int _tab) {
     super(_tab);
     wrapperLabel = "varDec";
+
+    development = true;
   }
 
   public String handleToken(Token token) throws IOException {
     switch (pos) {
+      case -2:
+        // TODO: Clean-up -2 cases
+        return postfix();
       case -1:
-        return preface(token);
+        return prefix(token);
       case 0:
         return parseToken(token, Match.keyword(token, Keyword.VAR));
       case 1:
@@ -30,11 +33,11 @@ public class CompileVarDec extends Compile {
       case 3:
         if (Match.symbol(token, Symbol.COMMA))
           return parseToken(token, true, 2);
-        return parseToken(token, Match.symbol(token, Symbol.SEMI_COLON));
+        if (Match.symbol(token, Symbol.SEMI_COLON))
+          return parseToken(token, true, -2);
       default:
-        if (Match.keyword(token, Keyword.VAR))
-          return postfaceRepeat(token);
-        return postface();
+        return fail();
     }
   }
+
 }

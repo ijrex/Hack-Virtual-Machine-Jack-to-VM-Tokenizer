@@ -1,17 +1,16 @@
 package compilationEngine;
 
 import token.*;
-import tokenlib.Keyword;
-import tokenlib.Symbol;
+import tokenlib.*;
 
 import java.io.IOException;
 
-import compilationEngine.util.*;
+import compilationEngine.util.Match;
 
 public class CompileSubroutineDec extends Compile {
 
-  Compile parameterList;
-  Compile subroutineBody;
+  Compile compileParameterList;
+  Compile compileSubroutineBody;
 
   public CompileSubroutineDec(int _tab) {
     super(_tab);
@@ -21,29 +20,30 @@ public class CompileSubroutineDec extends Compile {
   public String handleToken(Token token) throws IOException {
     switch (pos) {
       case -1:
-        return preface(token);
+        return prefix(token);
       case 0:
         return parseToken(token,
             Match.keyword(token, new Keyword[] { Keyword.CONSTRUCTOR, Keyword.FUNCTION, Keyword.METHOD }));
       case 1:
-        return parseToken(token,
-            Match.keyword(token, new Keyword[] { Keyword.VOID, Keyword.BOOLEAN, Keyword.CHAR, Keyword.INT }));
+        return parseToken(token, Match.type(token, Keyword.VOID));
       case 2:
         return parseToken(token, Match.identifier(token));
       case 3:
         return parseToken(token, Match.symbol(token, Symbol.PARENTHESIS_L));
       case 4:
-        if (parameterList == null)
-          parameterList = new CompileParameterList(tab);
-        return parameterList.handleToken(token)
-            + (Match.symbol(token, Symbol.PARENTHESIS_R) ? parseToken(token, true) : "");
+        if (compileParameterList == null)
+          compileParameterList = new CompileParameterList(tab);
+        return handleChildClass(compileParameterList, token);
       case 5:
-        if (subroutineBody == null)
-          subroutineBody = new CompileSubroutineBody(tab);
-        if (!subroutineBody.isComplete())
-          return subroutineBody.handleToken(token);
+        return parseToken(token, Match.symbol(token, Symbol.PARENTHESIS_R));
+      case 6:
+        if (compileSubroutineBody == null)
+          compileSubroutineBody = new CompileSubroutineBody(tab);
+        return handleChildClass(compileSubroutineBody, token);
+      case 7:
+        return postfix();
       default:
-        return postface();
+        return fail();
     }
   }
 }
