@@ -15,27 +15,49 @@
       <statements>
         <letStatement>
           <keyword> let </keyword>
-          <identifier> intConst1 </identifier>
+          <identifier> stConst1 </identifier>
           <symbol> = </symbol>
           <expression>
             <term>
-              <integerConstant> 4 </integerConstant>
+              <stringConstant>  </stringConstant>
             </term>
           </expression>
           <symbol> ; </symbol>
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
-          <identifier> intConst2 </identifier>
+          <identifier> strConst2 </identifier>
           <symbol> = </symbol>
           <expression>
             <term>
-              <integerConstant> 999 </integerConstant>
+              <stringConstant> abc </stringConstant>
             </term>
           </expression>
           <symbol> ; </symbol>
         </letStatement>
-        </statements>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> strConst3 </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <stringConstant> 2 </stringConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> strConst4 </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <stringConstant> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </stringConstant>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+      </statements>
       <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>

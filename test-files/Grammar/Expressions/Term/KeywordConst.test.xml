@@ -15,30 +15,48 @@
 			<statements>
 				<letStatement>
 					<keyword> let </keyword>
-					<identifier> intConst </identifier>
+					<identifier> keywordConst1 </identifier>
 					<symbol> = </symbol>
 					<expression>
 						<term>
-							<integerConstant> 4 </integerConstant>
+							<keyword> true </keyword>
 						</term>
 					</expression>
 					<symbol> ; </symbol>
 				</letStatement>
 				<letStatement>
 					<keyword> let </keyword>
-					<identifier> intConst </identifier>
+					<identifier> keywordConst2 </identifier>
 					<symbol> = </symbol>
 					<expression>
 						<term>
-							<integerConstant> 999 </integerConstant>
+							<keyword> false </keyword>
 						</term>
 					</expression>
 					<symbol> ; </symbol>
 				</letStatement>
-				<returnStatement>
-					<keyword> return </keyword>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> keywordConst3 </identifier>
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<keyword> null </keyword>
+						</term>
+					</expression>
 					<symbol> ; </symbol>
-				</returnStatement>
+				</letStatement>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> keywordConst4 </identifier>
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<keyword> this </keyword>
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</letStatement>
 			</statements>
 			<symbol> } </symbol>
 		</subroutineBody>
