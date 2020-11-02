@@ -19,8 +19,6 @@ public class CompileTerm extends Compile {
   public CompileTerm(int _tab) {
     super(_tab);
     wrapperLabel = "term";
-
-    development = true;
   }
 
   public String handleToken(Token token) throws IOException {
@@ -56,11 +54,9 @@ public class CompileTerm extends Compile {
             case PARENTHESIS_L:
               return parseToken(lookAhead, true) + parseToken(token, true, 102);
             default:
-              // End Term
               return parseToken(lookAhead, true) + postfix();
           }
         }
-        // TODO: Handle this
         return fail();
       case 100:
         return parseToken(token, Match.identifier(token));
