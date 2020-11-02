@@ -152,7 +152,7 @@
 				</letStatement>
 				<letStatement>
 					<keyword> let </keyword>
-					<identifier> varNameExpression6 </identifier>
+					<identifier> varNameExpression7 </identifier>
 					<symbol> = </symbol>
 					<expression>
 						<term>
