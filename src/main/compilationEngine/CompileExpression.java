@@ -28,13 +28,9 @@ public class CompileExpression extends Compile {
         return handleChildClass(compileTerm1, token);
       case 1:
         if (Match.op(token)) {
-          compileTerm2 = new CompileTerm(tab);
-          return parseToken(token, true);
+          compileTerm1 = null;
+          return parseToken(token, true, 0);
         }
-        return postfix();
-      case 2:
-        return handleChildClass(compileTerm2, token);
-      case 3:
         return postfix();
       default:
         return fail();
