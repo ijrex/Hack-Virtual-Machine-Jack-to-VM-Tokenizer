@@ -22,13 +22,11 @@ public class CompileTerm extends Compile {
 
   public String handleToken(Token token) throws IOException {
     switch (pos) {
-      case -2:
-        return postfix();
       case -1:
         return prefix(token);
       case 0:
         if (Match.intConst(token) || Match.stringConst(token) || Match.keywordConst(token))
-          return parseToken(token, true, -2);
+          return parseToken(token, true, 500);
         if (Match.identifier(token)) {
           lookAhead = token;
           pos++;
@@ -93,6 +91,9 @@ public class CompileTerm extends Compile {
           compileTerm = new CompileTerm(tab);
         return handleChildClass(compileTerm, token);
       case 401:
+        return postfix();
+
+      case 500:
         return postfix();
 
       default:
