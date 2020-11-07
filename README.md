@@ -20,13 +20,13 @@ Loads Jack source file(s) and initiates the Tokenizer which handles file parsing
 
 ### `tokenizer`
 
-##### Handles parsing/writing files
+#### Handles parsing/writing files
 
 The Tokenizer accepts input files from the VM Compiler. This module marches through each file, sorting lines of Jack code into individual tokens while checking against the Jack language grammar. Assuming no faults are found, XML made-up of each token in the programme is written to the same directory with matching filename(s) to the input files.
 
 ### `tokenlib`:
 
-##### Library of all constant tokens in the Jack language as well as unique string and integer constants encountered by the Tokenizer.
+#### Library of all constant tokens in the Jack language as well as unique string and integer constants encountered by the Tokenizer.
 
 Tokens can match one of the following types outlined below. Full specification of the Jack language [here](https://www.nand2tetris.org/course).
 
@@ -48,11 +48,11 @@ Tokens can match one of the following types outlined below. Full specification o
 
 ### `token`
 
-##### Classes for the token types described above with a range of helper functions.
+#### Classes for the token types described above with a range of helper functions.
 
 ### `compilationengine`
 
-##### The main driver for language grammar matching. The inbuilt `parseToken` method is called once for every token encountered by the Tokenizer.
+#### The main driver for language grammar matching. The inbuilt `parseToken` method is called once for every token encountered by the Tokenizer.
 
 While the Tokenizer marches through the Jack programme and feeds tokens to the Compilation Engine, the Compilation Engine internally registers and handles the programme position using built-in subclasses.
 
@@ -64,13 +64,13 @@ Subsequent to the variable declarations, a series of Jack subroutines may be enc
 
 # Loading files
 
-##### The `loadfiles` package contains a utility class for importing files of a specific type within a given directory.
+#### The `loadfiles` package contains a utility class for importing files of a specific type within a given directory.
 
 # Development mode
 
 The recursive nature of the Compilaton Engine makes it fairly difficult to develop for. Subroutines rely on nested subroutines with unknown depths and do not know in advance when they will complete.
 
-A `development = true` setting is available in the constructor for all Compile classes. This mode lets the compiler subroutine 'force close' out gracefully rather than throw an error if incomplete.
+A `development = true` setting is available in the constructor for all Compile classes. This mode lets the compiler subroutine 'force close' gracefully rather than throw an error if incomplete.
 
 As an example - `CompileStatementWhile` expects the grammar `while` `(` `expression` `)` `{` `statements` `}`. During development, we may only have the first half of this statement built (`while` `(` `expression` `)` `{`).
 
@@ -104,7 +104,7 @@ By setting `develop` on `CompileStatementWhile` and its parent classes - the pro
 
 # Tests
 
-##### XML files with the expected output from the compiler have the `.test.xml` suffix and are found in the `/tests/**/*` subdirectories.
+#### XML files with the expected output from the compiler have the `.test.xml` suffix and are found in the `/tests/**/*` subdirectories.
 
 Output files from the compiler can be checked against the `.test.xml` files using a [text comparison tool](https://www.nand2tetris.org/software).
 
