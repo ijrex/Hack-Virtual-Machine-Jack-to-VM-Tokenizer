@@ -70,7 +70,7 @@
 			</varDec>
 			<varDec>
 				<keyword> var </keyword>
-				<keyword> char </keyword>
+				<keyword> int </keyword>
 				<identifier> abc </identifier>
 				<symbol> , </symbol>
 				<identifier> def </identifier>
