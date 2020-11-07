@@ -20,7 +20,6 @@ public class CompileVarDec extends Compile {
   public String handleToken(Token token) throws IOException {
     switch (pos) {
       case -2:
-        // TODO: Clean-up -2 cases
         return postfix();
       case -1:
         return prefix(token);

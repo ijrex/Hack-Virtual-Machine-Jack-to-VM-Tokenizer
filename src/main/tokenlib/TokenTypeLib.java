@@ -23,9 +23,6 @@ public class TokenTypeLib {
     stringConstPat = Pattern.compile("^\".*\"");
     identifierPat = Pattern.compile("^[A-Za-z][\\w]*");
 
-    // Populate `tokens` map with predefined keyword and
-    // symbol tokens. i.e. 'class', '{'
-
     for (Keyword keyword : Keyword.values()) {
       String value = keyword.getValue();
       tokens.put(value, new KeywordToken(value, keyword));
@@ -41,31 +38,26 @@ public class TokenTypeLib {
 
     Matcher mat;
 
-    // Check if Keyword token
     mat = keywordPat.matcher(line);
     if (mat.find())
       return tokens.get(mat.group(0).trim());
 
-    // Check if Symbol token
     mat = symbolPat.matcher(line);
     if (mat.find())
       return tokens.get(mat.group(0));
 
-    // Check if Int Const token and create new
     mat = intConstPat.matcher(line);
     if (mat.find()) {
       String token = mat.group(0);
       return putNewToken(token, new IntConstToken(token));
     }
 
-    // Check if Str Const token and create new
     mat = stringConstPat.matcher(line);
     if (mat.find()) {
       String token = mat.group(0);
       return putNewToken(token, new StrConstToken(token));
     }
 
-    // Check if Identifier token and create new
     mat = identifierPat.matcher(line);
     if (mat.find()) {
       String token = mat.group(0);
