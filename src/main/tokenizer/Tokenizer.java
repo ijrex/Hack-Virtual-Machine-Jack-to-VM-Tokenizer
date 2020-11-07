@@ -15,7 +15,6 @@ import java.util.LinkedList;
 import java.util.HashMap;
 
 import java.io.FileWriter;
-import java.io.IOException;
 
 public class Tokenizer {
 
