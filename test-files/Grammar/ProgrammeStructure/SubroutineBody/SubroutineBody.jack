@@ -11,7 +11,7 @@ class Main {
       var boolean c;
       var ClassName d;
 
-      var int abc, def;
+      var char abc, def;
       var int abc, def, ghi, jkl;
 
       return this;
