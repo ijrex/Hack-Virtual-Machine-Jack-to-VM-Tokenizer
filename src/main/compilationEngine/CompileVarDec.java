@@ -19,9 +19,6 @@ public class CompileVarDec extends Compile {
 
   public String handleToken(Token token) throws IOException {
     switch (pos) {
-      case -2:
-        // TODO: Clean-up -2 cases
-        return postfix();
       case -1:
         return prefix(token);
       case 0:
@@ -34,7 +31,10 @@ public class CompileVarDec extends Compile {
         if (Match.symbol(token, Symbol.COMMA))
           return parseToken(token, true, 2);
         if (Match.symbol(token, Symbol.SEMI_COLON))
-          return parseToken(token, true, -2);
+          return parseToken(token, true);
+        return fail();
+      case 4:
+        return postfix();
       default:
         return fail();
     }
