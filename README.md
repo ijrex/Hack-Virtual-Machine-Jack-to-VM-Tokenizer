@@ -43,7 +43,7 @@ Tokens can match one of the following types outlined below. Full specification o
   A decimal number in the range 0-32767
 
 - ###### STRING CONSTANT
-  Enclosed in double quotation marks (`"`) - a sequence of Unicode characters not including a double quote or new line.
+  Enclosed in double quotation marks (`"`) - a sequence of Unicode characters not including a double quote or new line
 
 
 ### `token`
